@@ -1,7 +1,13 @@
 const express = require('express');
-const leagueRoute = require('./public/league/');
+const publicLeagueRoute = require('./public/league/');
+const adminLeagueRoute = require('./admin/league/');
+
 const router = express.Router();
 
-router.use('/league', leagueRoute);
+// public endpoints
+router.use('/league', publicLeagueRoute);
+
+// admin endpoints
+router.use('/admin/league', adminLeagueRoute);
 
 module.exports = router;

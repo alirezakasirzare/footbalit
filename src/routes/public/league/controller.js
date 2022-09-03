@@ -1,13 +1,16 @@
-class League {
-  getAllLeagues = (req, res) => {};
+const League = require('../../../models/league');
 
-  getOneLeague = (req, res) => {};
+class LeagueController {
+  getAllLeagues = async (req, res) => {
+    const leagues = await League.find();
+    res.json(leagues);
+  };
 
-  createLeague = (req, res) => {};
-
-  editOneLeague = (req, res) => {};
-
-  deleteOneLeague = (req, res) => {};
+  getOneLeague = async (req, res) => {
+    const id = req.params.id;
+    const league = await League.findById(id);
+    res.json(league);
+  };
 }
 
-module.exports = new League();
+module.exports = new LeagueController();
