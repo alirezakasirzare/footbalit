@@ -13,4 +13,5 @@ const schema = new mongoose.Schema({
   country: stringRequiredRule,
 });
 
-module.exports = mongoose.model('League', schema);
+const League = mongoose.model('League', schema);
+module.exports = League;

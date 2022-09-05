@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const connectDatabase = require('./db');
 require('express-async-errors');
-const routes = require('./src/routes/router.js');
+const routes = require('./src/router.js');
 
 // setup
 const app = express();
