@@ -1,5 +1,5 @@
 const express = require('express');
-const idValidator = require('../../../middlewares/validator');
+const idValidator = require('../../../middlewares/idValidator');
 const controller = require('./controller');
 const router = express.Router();
 
