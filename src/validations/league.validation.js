@@ -1,16 +1,24 @@
 const BaseValidator = require('./_base.validator');
 
 class LeagueValidation extends BaseValidator {
-  keyValueError = (error) => {};
-
-  createLeauge = (req, res) => {
-    const validation = {
-      persian_name: 'string|min:1|max:100',
-      english_name: 'string|min:1|max:100',
-      country: 'string|min:1|max:100',
+  create = (req, res, next) => {
+    const rules = {
+      persian_name: 'string|max:100',
+      english_name: 'string|max:100',
+      country: 'string|max:100',
     };
 
-    this.applyValidation(req, res, validation);
+    this.checkValidation(req, res, next, rules);
+  };
+
+  update = (req, res, next) => {
+    const rules = {
+      persian_name: 'string|max:100|optional',
+      english_name: 'string|max:100|optional',
+      country: 'string|max:100|optional',
+    };
+
+    this.checkValidation(req, res, next, rules);
   };
 }
 
