@@ -2,37 +2,41 @@ const League = require('../models/league.model');
 const BaseController = require('./_base.controller');
 
 class LeagueController extends BaseController {
+  complete = (res, result) => {
+    this.sendResponse(res, { data: result, expect: 'لیگ' });
+  };
+
   getAll = async (req, res) => {
-    const leauges = await League.find();
-    res.json(leauges);
+    const result = await League.find();
+    this.complete(res, result);
   };
 
   get = async (req, res) => {
     const id = req.params.id;
 
-    const league = await League.findById(id);
-    res.json(league);
+    const result = await League.findById(id);
+    this.complete(res, result);
   };
 
   delete = async (req, res) => {
     const id = req.params.id;
 
-    const league = await League.findByIdAndRemove(id);
-    res.json(league);
+    const result = await League.findByIdAndRemove(id);
+    this.complete(res, result);
   };
 
   create = async (req, res) => {
     const body = req.body;
     const leauge = new League(body);
     const result = await leauge.save();
-    res.json(result);
+    this.complete(res, result);
   };
 
   update = async (req, res) => {
     const id = req.params.id;
 
     const body = req.body;
-    const league = await League.findByIdAndUpdate(
+    const result = await League.findByIdAndUpdate(
       id,
       {
         $set: body,
@@ -41,7 +45,7 @@ class LeagueController extends BaseController {
         new: true,
       }
     );
-    res.json(league);
+    this.complete(res, result);
   };
 }
 

@@ -1,6 +1,7 @@
-const validatorService = require('../services/fastestValidator.service');
+const validatorService = require('../services/validator.service');
 const { pick, transform } = require('lodash');
 const { validatorLabels } = require('../config/validator.config');
+const { errorResponse } = require('../utils/structureResponse.helper');
 
 class BaseValidator {
   keyValueError = (error) => {
@@ -26,11 +27,17 @@ class BaseValidator {
     const labeldRules = this.addLabelToRules(rules);
     const validationErsult = validatorService.validate(body, labeldRules);
     if (validationErsult !== true) {
-      return res.json(this.keyValueError(validationErsult));
+      const keyValueObject = this.keyValueError(validationErsult);
+      return this.sendError(res, keyValueObject);
     }
 
     req.body = pick(body, Object.keys(rules));
     next();
+  };
+
+  sendError = (res, error) => {
+    const response = errorResponse(error);
+    res.status(400).json(response);
   };
 }
 
