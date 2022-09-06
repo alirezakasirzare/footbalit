@@ -9,28 +9,39 @@ class LeagueController extends BaseController {
 
   get = async (req, res) => {
     const id = req.params.id;
-    const isValidId = this.checkMongoId(id);
-    if (!isValidId) return res.send('not valid');
 
     const league = await League.findById(id);
-    if (league) {
-      res.json(league);
-    } else {
-      res.send('not found');
-    }
+    res.json(league);
   };
 
   delete = async (req, res) => {
     const id = req.params.id;
-    const isValidId = this.checkMongoId(id);
-    if (!isValidId) return res.send('not valid');
 
     const league = await League.findByIdAndRemove(id);
-    if (league) {
-      res.json(league);
-    } else {
-      res.send('not found');
-    }
+    res.json(league);
+  };
+
+  create = async (req, res) => {
+    const body = req.body;
+    const leauge = new League(body);
+    const result = await leauge.save();
+    res.json(result);
+  };
+
+  update = async (req, res) => {
+    const id = req.params.id;
+
+    const body = req.body;
+    const league = await League.findByIdAndUpdate(
+      id,
+      {
+        $set: body,
+      },
+      {
+        new: true,
+      }
+    );
+    res.json(league);
   };
 }
 
