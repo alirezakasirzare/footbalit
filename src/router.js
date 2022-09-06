@@ -1,7 +1,7 @@
 const express = require('express');
-const leagueRouter = require('./routes/league.route');
+const leagueRoutes = require('./routes/league.route');
 const Router = express.Router();
 
-Router.use('/league', leagueRouter);
+Router.use('/league', leagueRoutes);
 
 module.exports = Router;

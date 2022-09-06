@@ -1,7 +1,3 @@
-const { checkMongoId } = require('../utilis/types.helper');
-
-class BaseController {
-  checkMongoId = checkMongoId;
-}
+class BaseController {}
 
 module.exports = BaseController;

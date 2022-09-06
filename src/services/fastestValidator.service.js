@@ -1,6 +1,8 @@
 const Validator = require('fastest-validator');
-const fastestValidationService = new Validator({
-  // TODO : add custom messages here
+const { validatorMessages } = require('../config/validator.config');
+
+const validatorService = new Validator({
+  messages: validatorMessages,
 });
 
-module.exports = fastestValidationService;
+module.exports = validatorService;

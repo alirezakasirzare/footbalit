@@ -1,5 +1,6 @@
-const fastestValidationService = require('../services/fastestValidator.service');
+const validatorService = require('../services/fastestValidator.service');
 const { pick, transform } = require('lodash');
+const { validatorLabels } = require('../config/validator.config');
 
 class BaseValidator {
   keyValueError = (error) => {
@@ -10,11 +11,20 @@ class BaseValidator {
     return customError;
   };
 
+  addLabelToRules = (rules) => {
+    const transformer = (result, value, key) => {
+      const labeldValue = { ...value, label: validatorLabels[key] };
+      result[key] = labeldValue;
+    };
+    const labeledRules = transform(rules, transformer, {});
+
+    return labeledRules;
+  };
+
   checkValidation = (req, res, next, rules) => {
     const body = req.body;
-    const check = fastestValidationService.compile(rules);
-    const validationErsult = check(body);
-
+    const labeldRules = this.addLabelToRules(rules);
+    const validationErsult = validatorService.validate(body, labeldRules);
     if (validationErsult !== true) {
       return res.json(this.keyValueError(validationErsult));
     }

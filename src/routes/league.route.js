@@ -1,12 +1,12 @@
 const express = require('express');
 const leagueController = require('../controllers/league.controller');
-const leagueValidation = require('../validations/league.validation');
-const leagueRouter = express.Router();
+const leagueValidator = require('../validator/league.validator');
+const leagueRoutes = express.Router();
 
-leagueRouter.get('/', leagueController.getAll);
-leagueRouter.post('/', leagueValidation.create, leagueController.create);
-leagueRouter.get('/:id', leagueController.get);
-leagueRouter.delete('/:id', leagueController.delete);
-leagueRouter.put('/:id', leagueValidation.update, leagueController.update);
+leagueRoutes.get('/', leagueController.getAll);
+leagueRoutes.post('/', leagueValidator.create, leagueController.create);
+leagueRoutes.get('/:id', leagueController.get);
+leagueRoutes.delete('/:id', leagueController.delete);
+leagueRoutes.put('/:id', leagueValidator.update, leagueController.update);
 
-module.exports = leagueRouter;
+module.exports = leagueRoutes;
