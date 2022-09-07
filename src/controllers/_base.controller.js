@@ -7,7 +7,7 @@ class BaseController {
   sendResponse = (res, { data, code, message, expect }) => {
     if (!data) {
       const error = {
-        message: message || `${expect} یافت نشد`,
+        _message: message || `${expect} یافت نشد`,
       };
       const response = errorResponse(error);
       const codeRes = code || 404;
