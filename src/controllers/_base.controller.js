@@ -4,19 +4,17 @@ const {
 } = require('../utils/structureResponse.helper');
 
 class BaseController {
-  sendResponse = (res, { data, code, message, expect }) => {
+  sendResponse = (res, data, code = 200) => {
     if (!data) {
       const error = {
-        _message: message || `${expect} یافت نشد`,
+        _message: 'یافت نشد',
       };
       const response = errorResponse(error);
-      const codeRes = code || 404;
-      return res.status(codeRes).json(response);
+      return res.status(404).json(response);
     }
 
     const response = successResponse(data);
-    const codeRes = code || 200;
-    res.status(codeRes).json(response);
+    res.status(code).json(response);
   };
 }
 
