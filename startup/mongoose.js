@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+/**
+ * Connect to mongo dataase
+ *
+ */
 connectDatabase = () => {
   mongoose
     .connect(process.env.DATABASE)

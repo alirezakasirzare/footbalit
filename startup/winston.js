@@ -1,5 +1,9 @@
 const winston = require('winston');
 
+/**
+ * Config winston logger to log in production and development environments
+ *
+ */
 configWinston = () => {
   const logsFileName = `./${process.env.LOGS}/errors.log`;
   winston.add(

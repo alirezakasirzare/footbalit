@@ -1,6 +1,11 @@
 const winston = require('winston');
 
+/**
+ * Handle process error
+ *
+ */
 const handleProcessError = () => {
+  // handle normal error
   process.on('uncaughtException', (ex) => {
     winston.error(ex.message, ex);
     setTimeout(() => {
@@ -8,6 +13,7 @@ const handleProcessError = () => {
     }, 2000);
   });
 
+  // handle promise rejection error
   process.on('unhandledRejection', (ex) => {
     winston.error(ex.message, ex);
     setTimeout(() => {

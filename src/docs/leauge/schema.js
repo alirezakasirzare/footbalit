@@ -5,6 +5,11 @@ const {
   docObjectIdSchema,
 } = require('../../utils/docs.helper');
 
+/**
+ *
+ * @param {Object} example - leauge parametters examples
+ * @returns {Object} - swagger leauge schema
+ */
 const createLeaugeSchema = (example) => {
   return {
     type: 'object',
@@ -28,18 +33,21 @@ const createLeaugeSchema = (example) => {
   };
 };
 
+// leauge input schema
 const leaugeInputSchema = createLeaugeSchema({
   persian_name: 'لیگ برتر',
   english_name: 'best leauge',
   country: 'iran',
 });
 
+// leauge error schema
 const leaugeErrorSchema = createLeaugeSchema({
   persian_name: 'نام فارسی الرامی است',
   english_name: 'نام انگلیسی الرامی است',
   country: 'نام کشور الرامی است',
 });
 
+// leauge schema
 const leaugeSchema = {
   type: 'object',
   properties: {
@@ -49,6 +57,7 @@ const leaugeSchema = {
   },
 };
 
+// all leauges schema
 const leaugesSchema = {
   type: 'array',
   items: {
