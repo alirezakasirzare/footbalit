@@ -1,3 +1,9 @@
+/**
+ * Return success schema sync with my wrapper response
+ *
+ * @param {Object} schema - swagger schema
+ * @returns {Object} - swagger schema with response wrapper
+ */
 const docSuccessWrapper = (schema) => {
   return {
     type: 'object',
@@ -20,6 +26,12 @@ const docSuccessWrapper = (schema) => {
   };
 };
 
+/**
+ * Return error schema sync with my wrapper response
+ *
+ * @param {Object} schema - swagger schema
+ * @returns {Object} - swagger schema with response wrapper
+ */
 const docErrorWrapper = (schema) => {
   return {
     type: 'object',
@@ -42,6 +54,7 @@ const docErrorWrapper = (schema) => {
   };
 };
 
+// part of schema with date
 const docDatePartSchema = {
   createdAt: {
     type: 'string',
@@ -55,6 +68,7 @@ const docDatePartSchema = {
   },
 };
 
+// mongo object id schema
 const docObjectIdSchema = {
   type: 'string',
   description: 'an mongoDb objet id',

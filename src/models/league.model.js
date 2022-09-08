@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const timestamps = require('mongoose-timestamp');
 
+// leauge schema
 const schema = new mongoose.Schema(
   {
     _id: {
