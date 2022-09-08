@@ -5,7 +5,7 @@ class LeagueValidator extends BaseValidator {
   create = (req, res, next) => {
     const itemValidation = { type: 'string', max: 100 };
     const rules = {
-      [validatorFeilds.persian_name]: itemValidation,
+      // [validatorFeilds.persian_name]: itemValidation,
       [validatorFeilds.english_name]: itemValidation,
       [validatorFeilds.country]: itemValidation,
     };
