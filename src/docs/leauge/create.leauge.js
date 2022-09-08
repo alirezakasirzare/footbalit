@@ -5,32 +5,17 @@ module.exports = {
     operationId: 'createTodo',
     parameters: [],
     requestBody: {
-      content: {
-        'application/json': {
-          schema: {
-            $ref: '#/components/schemas/LeaugeInput',
-          },
-        },
-      },
+      $ref: '#/components/requestBodies/Leauge',
     },
     responses: {
       201: {
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/Leauge',
-            },
-          },
-        },
+        $ref: '#/components/responses/Leauge',
       },
       400: {
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/LeaugeError',
-            },
-          },
-        },
+        $ref: '#/components/responses/LeaugeError',
+      },
+      500: {
+        $ref: '#/components/responses/serverError',
       },
     },
   },

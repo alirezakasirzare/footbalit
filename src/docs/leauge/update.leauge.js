@@ -2,53 +2,22 @@ module.exports = {
   put: {
     tags: ['leauge'],
     description: 'update todo',
-    parameters: [
-      {
-        name: 'id',
-        in: 'path',
-        schema: {
-          $ref: '#/components/schemas/id',
-        },
-        required: true,
-        description: 'leauge id',
-      },
-    ],
+    parameters: [{ $ref: '#/components/parameters/path/id' }],
     requestBody: {
-      content: {
-        'application/json': {
-          schema: {
-            $ref: '#/components/schemas/LeaugeInput',
-          },
-        },
-      },
+      $ref: '#/components/requestBodies/Leauge',
     },
     responses: {
       200: {
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/Leauge',
-            },
-          },
-        },
-      },
-      404: {
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/notFound',
-            },
-          },
-        },
+        $ref: '#/components/responses/Leauge',
       },
       400: {
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/LeaugeError',
-            },
-          },
-        },
+        $ref: '#/components/responses/LeaugeError',
+      },
+      404: {
+        $ref: '#/components/responses/notFoundError',
+      },
+      500: {
+        $ref: '#/components/responses/serverError',
       },
     },
   },

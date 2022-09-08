@@ -5,14 +5,10 @@ module.exports = {
     parameters: [],
     responses: {
       200: {
-        content: {
-          'application/json': {
-            schema: {
-              type: 'oject',
-              $ref: '#/components/schemas/Leauges',
-            },
-          },
-        },
+        $ref: '#/components/responses/Leauges',
+      },
+      500: {
+        $ref: '#/components/responses/serverError',
       },
     },
   },

@@ -2,35 +2,16 @@ module.exports = {
   get: {
     tags: ['leauge'],
     description: 'get one leaug',
-    parameters: [
-      {
-        name: 'id',
-        in: 'path',
-        schema: {
-          $ref: '#/components/schemas/id',
-        },
-        required: true,
-        description: 'leauge id',
-      },
-    ],
+    parameters: [{ $ref: '#/components/parameters/path/id' }],
     responses: {
       200: {
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/Leauge',
-            },
-          },
-        },
+        $ref: '#/components/responses/Leauge',
       },
       404: {
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/notFound',
-            },
-          },
-        },
+        $ref: '#/components/responses/notFoundError',
+      },
+      500: {
+        $ref: '#/components/responses/serverError',
       },
     },
   },

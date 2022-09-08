@@ -65,9 +65,67 @@ const leaugesSchema = {
   },
 };
 
+const leaugeRes = {
+  Leauge: {
+    content: {
+      'application/json': {
+        schema: {
+          $ref: '#/components/schemas/Leauge',
+        },
+      },
+    },
+  },
+};
+
+const leaugesRes = {
+  Leauges: {
+    content: {
+      'application/json': {
+        schema: {
+          $ref: '#/components/schemas/Leauges',
+        },
+      },
+    },
+  },
+};
+
+const leaugeBody = {
+  Leauge: {
+    content: {
+      'application/json': {
+        schema: {
+          $ref: '#/components/schemas/LeaugeInput',
+        },
+      },
+    },
+  },
+};
+
+const leaugeErrorRes = {
+  LeaugeError: {
+    content: {
+      'application/json': {
+        schema: {
+          $ref: '#/components/schemas/LeaugeError',
+        },
+      },
+    },
+  },
+};
+
 module.exports = {
-  Leauge: docSuccessWrapper(leaugeSchema),
-  Leauges: docSuccessWrapper(leaugesSchema),
-  LeaugeInput: leaugeInputSchema,
-  LeaugeError: docErrorWrapper(leaugeErrorSchema),
+  schemas: {
+    Leauge: docSuccessWrapper(leaugeSchema),
+    Leauges: docSuccessWrapper(leaugesSchema),
+    LeaugeInput: leaugeInputSchema,
+    LeaugeError: docErrorWrapper(leaugeErrorSchema),
+  },
+  responses: {
+    ...leaugeRes,
+    ...leaugesRes,
+    ...leaugeErrorRes,
+  },
+  bodies: {
+    ...leaugeBody,
+  },
 };
