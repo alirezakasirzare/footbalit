@@ -23,6 +23,27 @@ class BaseController {
     const response = successResponse(data);
     res.status(code).json(response);
   };
+
+  /**
+   * Send response just have message in data
+   *
+   * @param {Object} res - express response
+   * @param {string} msg - response message
+   * @param {number} code - status codes
+   */
+  sendResponseMeg = (res, msg, code = 200) => {
+    const data = {
+      _message: msg,
+    };
+
+    if (code <= 200 && code < 299) {
+      const response = successResponse(data);
+      return res.status(code).json(response);
+    }
+
+    const response = errorResponse(data);
+    res.status(code).json(response);
+  };
 }
 
 module.exports = BaseController;

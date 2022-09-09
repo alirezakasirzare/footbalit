@@ -23,6 +23,7 @@ const schema = new mongoose.Schema(
       type: String,
       maxlength: 300,
       required: true,
+      unique: true,
     },
     password: {
       type: String,

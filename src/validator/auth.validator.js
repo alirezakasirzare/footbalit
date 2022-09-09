@@ -11,7 +11,7 @@ class AuthValidator extends BaseValidator {
    */
   login = (req, res, next) => {
     const rules = {
-      email: { type: 'string', max: 300 },
+      email: { type: 'email', max: 300 },
       password: { type: 'string', max: 100, min: 4 },
     };
 
