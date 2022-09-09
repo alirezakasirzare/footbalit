@@ -1,8 +1,8 @@
 module.exports = {
   tags: [
     {
-      name: 'leauge',
-      description: 'Everything about leauge',
+      name: 'league',
+      description: 'Everything about league',
     },
   ],
 };

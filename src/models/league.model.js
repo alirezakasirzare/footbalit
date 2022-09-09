@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const timestamps = require('mongoose-timestamp');
 
-// leauge schema
+// league schema
 const schema = new mongoose.Schema(
   {
     _id: {

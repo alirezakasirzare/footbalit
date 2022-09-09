@@ -1,11 +1,11 @@
 module.exports = {
   get: {
-    tags: ['leauge'],
+    tags: ['league'],
     description: 'get all leaugs',
     parameters: [],
     responses: {
       200: {
-        $ref: '#/components/responses/Leauges',
+        $ref: '#/components/responses/leagues',
       },
       500: {
         $ref: '#/components/responses/serverError',

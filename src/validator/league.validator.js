@@ -3,7 +3,7 @@ const BaseValidator = require('./_base.validator');
 
 class LeagueValidator extends BaseValidator {
   /**
-   * Create required leauge rules and validate the request body
+   * Create required league rules and validate the request body
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
@@ -21,7 +21,7 @@ class LeagueValidator extends BaseValidator {
   };
 
   /**
-   * Create optional leauge rules and validate the request body
+   * Create optional league rules and validate the request body
    *
    * @param {Object} req - express request
    * @param {Object} res - express response

@@ -1,17 +1,17 @@
 module.exports = {
   put: {
-    tags: ['leauge'],
+    tags: ['league'],
     description: 'update todo',
     parameters: [{ $ref: '#/components/parameters/path/id' }],
     requestBody: {
-      $ref: '#/components/requestBodies/Leauge',
+      $ref: '#/components/requestBodies/league',
     },
     responses: {
       200: {
-        $ref: '#/components/responses/Leauge',
+        $ref: '#/components/responses/league',
       },
       400: {
-        $ref: '#/components/responses/LeaugeError',
+        $ref: '#/components/responses/leagueError',
       },
       404: {
         $ref: '#/components/responses/notFoundError',

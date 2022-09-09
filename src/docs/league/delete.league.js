@@ -1,11 +1,11 @@
 module.exports = {
-  get: {
-    tags: ['leauge'],
-    description: 'get one leaug',
+  delete: {
+    tags: ['league'],
+    description: 'Deleting a league',
     parameters: [{ $ref: '#/components/parameters/path/id' }],
     responses: {
       200: {
-        $ref: '#/components/responses/Leauge',
+        $ref: '#/components/responses/league',
       },
       404: {
         $ref: '#/components/responses/notFoundError',

@@ -1,11 +1,11 @@
 module.exports = {
-  delete: {
-    tags: ['leauge'],
-    description: 'Deleting a Leauge',
+  get: {
+    tags: ['league'],
+    description: 'get one leaug',
     parameters: [{ $ref: '#/components/parameters/path/id' }],
     responses: {
       200: {
-        $ref: '#/components/responses/Leauge',
+        $ref: '#/components/responses/league',
       },
       404: {
         $ref: '#/components/responses/notFoundError',

@@ -3,7 +3,7 @@ const BaseController = require('./_base.controller');
 
 class LeagueController extends BaseController {
   /**
-   * Get all leauges
+   * Get all leagues
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
@@ -14,7 +14,7 @@ class LeagueController extends BaseController {
   };
 
   /**
-   * Get one leauge
+   * Get one league
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
@@ -26,7 +26,7 @@ class LeagueController extends BaseController {
   };
 
   /**
-   * Delete one leauge
+   * Delete one league
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
@@ -38,20 +38,20 @@ class LeagueController extends BaseController {
   };
 
   /**
-   * Create one leauge
+   * Create one league
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
    */
   create = async (req, res) => {
     const body = req.body;
-    const leauge = new League(body);
-    const result = await leauge.save();
+    const league = new League(body);
+    const result = await league.save();
     this.sendResponse(res, result, 201);
   };
 
   /**
-   * Update one leauge
+   * Update one league
    *
    * @param {Object} req - express request
    * @param {Object} res - express response

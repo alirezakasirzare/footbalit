@@ -1,18 +1,18 @@
 module.exports = {
   post: {
-    tags: ['leauge'],
+    tags: ['league'],
     description: 'Create todo',
     operationId: 'createTodo',
     parameters: [],
     requestBody: {
-      $ref: '#/components/requestBodies/Leauge',
+      $ref: '#/components/requestBodies/league',
     },
     responses: {
       201: {
-        $ref: '#/components/responses/Leauge',
+        $ref: '#/components/responses/league',
       },
       400: {
-        $ref: '#/components/responses/LeaugeError',
+        $ref: '#/components/responses/leagueError',
       },
       500: {
         $ref: '#/components/responses/serverError',

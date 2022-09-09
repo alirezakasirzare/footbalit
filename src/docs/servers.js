@@ -1,4 +1,4 @@
-const port = process.env.port;
+const port = process.env.PORT;
 
 module.exports = {
   servers: [

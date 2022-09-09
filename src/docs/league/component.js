@@ -7,10 +7,10 @@ const {
 
 /**
  *
- * @param {Object} example - leauge parametters examples
- * @returns {Object} - swagger leauge schema
+ * @param {Object} example - league parametters examples
+ * @returns {Object} - swagger league schema
  */
-const createLeaugeSchema = (example) => {
+const createleagueSchema = (example) => {
   return {
     type: 'object',
     properties: {
@@ -33,80 +33,80 @@ const createLeaugeSchema = (example) => {
   };
 };
 
-// leauge input schema
-const leaugeInputSchema = createLeaugeSchema({
+// league input schema
+const leagueInputSchema = createleagueSchema({
   persian_name: 'لیگ برتر',
-  english_name: 'best leauge',
+  english_name: 'best league',
   country: 'iran',
 });
 
-// leauge error schema
-const leaugeErrorSchema = createLeaugeSchema({
+// league error schema
+const leagueErrorSchema = createleagueSchema({
   persian_name: 'نام فارسی الرامی است',
   english_name: 'نام انگلیسی الرامی است',
   country: 'نام کشور الرامی است',
 });
 
-// leauge schema
-const leaugeSchema = {
+// league schema
+const leagueSchema = {
   type: 'object',
   properties: {
-    ...leaugeInputSchema.properties,
+    ...leagueInputSchema.properties,
     ...docDatePartSchema,
     _id: docObjectIdSchema,
   },
 };
 
-// all leauges schema
-const leaugesSchema = {
+// all leagues schema
+const leaguesSchema = {
   type: 'array',
   items: {
-    ...leaugeSchema,
+    ...leagueSchema,
   },
 };
 
-const leaugeRes = {
-  Leauge: {
+const leagueRes = {
+  league: {
     content: {
       'application/json': {
         schema: {
-          $ref: '#/components/schemas/Leauge',
+          $ref: '#/components/schemas/league',
         },
       },
     },
   },
 };
 
-const leaugesRes = {
-  Leauges: {
+const leaguesRes = {
+  leagues: {
     content: {
       'application/json': {
         schema: {
-          $ref: '#/components/schemas/Leauges',
+          $ref: '#/components/schemas/leagues',
         },
       },
     },
   },
 };
 
-const leaugeBody = {
-  Leauge: {
+const leagueBody = {
+  league: {
     content: {
       'application/json': {
         schema: {
-          $ref: '#/components/schemas/LeaugeInput',
+          $ref: '#/components/schemas/leagueInput',
         },
       },
     },
   },
 };
 
-const leaugeErrorRes = {
-  LeaugeError: {
+const leagueErrorRes = {
+  leagueError: {
     content: {
       'application/json': {
         schema: {
-          $ref: '#/components/schemas/LeaugeError',
+          $ref: '#/components/schemas/leagueError',
         },
       },
     },
@@ -115,17 +115,17 @@ const leaugeErrorRes = {
 
 module.exports = {
   schemas: {
-    Leauge: docSuccessWrapper(leaugeSchema),
-    Leauges: docSuccessWrapper(leaugesSchema),
-    LeaugeInput: leaugeInputSchema,
-    LeaugeError: docErrorWrapper(leaugeErrorSchema),
+    league: docSuccessWrapper(leagueSchema),
+    leagues: docSuccessWrapper(leaguesSchema),
+    leagueInput: leagueInputSchema,
+    leagueError: docErrorWrapper(leagueErrorSchema),
   },
   responses: {
-    ...leaugeRes,
-    ...leaugesRes,
-    ...leaugeErrorRes,
+    ...leagueRes,
+    ...leaguesRes,
+    ...leagueErrorRes,
   },
   bodies: {
-    ...leaugeBody,
+    ...leagueBody,
   },
 };

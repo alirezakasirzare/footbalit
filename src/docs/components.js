@@ -1,5 +1,5 @@
 const { docErrorWrapper, docObjectIdSchema } = require('../utils/docs.helper');
-const leaugeComponent = require('./leauge/component');
+const leagueComponent = require('./league/component');
 
 // not found error schema
 const notFoundSchema = {
@@ -32,7 +32,7 @@ module.exports = {
       id: docObjectIdSchema,
       notFound: docErrorWrapper(notFoundSchema),
       serverError: docErrorWrapper(serverErrorSchema),
-      ...leaugeComponent.schemas,
+      ...leagueComponent.schemas,
     },
 
     // parameters
@@ -45,7 +45,7 @@ module.exports = {
             $ref: '#/components/schemas/id',
           },
           required: true,
-          description: 'leauge id',
+          description: 'league id',
         },
       },
     },
@@ -72,12 +72,12 @@ module.exports = {
         },
       },
 
-      ...leaugeComponent.responses,
+      ...leagueComponent.responses,
     },
 
     // body
     requestBodies: {
-      ...leaugeComponent.bodies,
+      ...leagueComponent.bodies,
     },
   },
 };
