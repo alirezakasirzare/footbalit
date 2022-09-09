@@ -30,6 +30,13 @@ const schema = new mongoose.Schema(
       minlength: 4,
       required: true,
     },
+    is_admin: {
+      type: Boolean,
+      default: false,
+    },
+    admin_roles: {
+      type: [String],
+    },
   },
   {
     _id: false,

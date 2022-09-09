@@ -27,8 +27,8 @@ class AuthValidator extends BaseValidator {
   register = (req, res, next) => {
     const rules = {
       firat_name: { type: 'string', max: 100 },
-      last_name: { type: 'string', max: 100 },
-      email: { type: 'string', max: 300 },
+      last_name: { type: 'string', max: 100, optional: true },
+      email: { type: 'email', max: 300 },
       password: { type: 'string', max: 100, min: 4 },
       confrim_password: { type: 'equal', field: 'password' },
     };

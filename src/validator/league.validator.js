@@ -10,11 +10,10 @@ class LeagueValidator extends BaseValidator {
    * @param {Function} next - express next
    */
   create = (req, res, next) => {
-    const itemValidation = { type: 'string', max: 100 };
     const rules = {
-      persian_name: itemValidation,
-      english_name: itemValidation,
-      country: itemValidation,
+      persian_name: { type: 'string', max: 100 },
+      english_name: { type: 'string', max: 100 },
+      country: { type: 'string', max: 100 },
     };
 
     this.checkValidation(req, res, next, rules);
@@ -28,11 +27,10 @@ class LeagueValidator extends BaseValidator {
    * @param {Function} next - express next
    */
   update = (req, res, next) => {
-    const itemValidation = { type: 'string', max: 100, optional: true };
     const rules = {
-      persian_name: itemValidation,
-      english_name: itemValidation,
-      country: itemValidation,
+      persian_name: { type: 'string', max: 100, optional: true },
+      english_name: { type: 'string', max: 100, optional: true },
+      country: { type: 'string', max: 100, optional: true },
     };
 
     this.checkValidation(req, res, next, rules);
