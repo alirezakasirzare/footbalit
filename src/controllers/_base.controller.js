@@ -12,16 +12,21 @@ class BaseController {
    * @param {number} code - status codes
    */
   sendResponse = (res, data, code = 200) => {
-    if (!data) {
-      const error = {
-        _message: 'یافت نشد',
-      };
-      const response = errorResponse(error);
-      return res.status(404).json(response);
+    if (code >= 200 && code < 299) {
+      if (!data) {
+        const error = {
+          _message: 'یافت نشد',
+        };
+        const response = errorResponse(error);
+        return res.status(404).json(response);
+      }
+
+      const response = successResponse(data);
+      return res.status(code).json(response);
     }
 
-    const response = successResponse(data);
-    res.status(code).json(response);
+    const response = errorResponse(data);
+    return res.status(code).json(response);
   };
 
   /**
