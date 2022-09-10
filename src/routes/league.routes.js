@@ -1,5 +1,10 @@
 const express = require('express');
 const leagueController = require('../controllers/league.controller');
+const {
+  hasLoggedIn,
+  isAdmin,
+  adminRoles,
+} = require('../middlewares/auth.middleware');
 const leagueValidator = require('../validator/league.validator');
 const leagueRoutes = express.Router();
 
@@ -10,12 +15,32 @@ leagueRoutes.get('/', leagueController.getAll);
 leagueRoutes.get('/:id', leagueController.get);
 
 // POST create one league
-leagueRoutes.post('/', leagueValidator.create, leagueController.create);
+leagueRoutes.post(
+  '/',
+  hasLoggedIn,
+  isAdmin,
+  adminRoles.League,
+  leagueValidator.create,
+  leagueController.create
+);
 
 // DELETE delete one league
-leagueRoutes.delete('/:id', leagueController.delete);
+leagueRoutes.delete(
+  '/:id',
+  hasLoggedIn,
+  isAdmin,
+  adminRoles.League,
+  leagueController.delete
+);
 
 // PUT update one league
-leagueRoutes.put('/:id', leagueValidator.update, leagueController.update);
+leagueRoutes.put(
+  '/:id',
+  hasLoggedIn,
+  isAdmin,
+  adminRoles.League,
+  leagueValidator.update,
+  leagueController.update
+);
 
 module.exports = leagueRoutes;
