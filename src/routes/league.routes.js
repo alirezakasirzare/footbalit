@@ -1,10 +1,6 @@
 const express = require('express');
 const leagueController = require('../controllers/league.controller');
-const {
-  hasLoggedIn,
-  isAdmin,
-  adminRoles,
-} = require('../middlewares/auth.middleware');
+const { hasLoggedIn, permissions } = require('../middlewares/auth.middleware');
 const leagueValidator = require('../validator/league.validator');
 const leagueRoutes = express.Router();
 
@@ -18,8 +14,7 @@ leagueRoutes.get('/:id', leagueController.get);
 leagueRoutes.post(
   '/',
   hasLoggedIn,
-  isAdmin,
-  adminRoles.League,
+  permissions.League,
   leagueValidator.create,
   leagueController.create
 );
@@ -28,8 +23,7 @@ leagueRoutes.post(
 leagueRoutes.delete(
   '/:id',
   hasLoggedIn,
-  isAdmin,
-  adminRoles.League,
+  permissions.League,
   leagueController.delete
 );
 
@@ -37,8 +31,7 @@ leagueRoutes.delete(
 leagueRoutes.put(
   '/:id',
   hasLoggedIn,
-  isAdmin,
-  adminRoles.League,
+  permissions.League,
   leagueValidator.update,
   leagueController.update
 );

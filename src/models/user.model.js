@@ -17,7 +17,6 @@ const schema = new mongoose.Schema(
     last_name: {
       type: String,
       maxlength: 100,
-      required: false,
       default: '',
     },
     email: {
@@ -32,11 +31,12 @@ const schema = new mongoose.Schema(
       minlength: 4,
       required: true,
     },
-    is_admin: {
-      type: Boolean,
-      default: false,
+    role: {
+      type: String,
+      enum: ['USER', 'ADMIN', 'SUPER_ADMIN'],
+      default: 'USER',
     },
-    admin_roles: {
+    permissions: {
       type: [String],
     },
   },

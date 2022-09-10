@@ -76,41 +76,26 @@ const forbiddenResponse = (res) => {
 };
 
 /**
- * If user is admin countinue, if not send error
+ * return middleware for check this user has this permission or not
  *
- * @param {Object} req - express request
- * @param {Object} res - express response
- * @param {Function} next - express next
+ * @param {permission} permission - rule of we expected
  */
-const isAdmin = (req, res, next) => {
-  if (!req.user.is_admin) {
-    return forbiddenResponse(res);
-  }
-  next();
-};
-
-/**
- * return middleware for check this user has this rule or not
- *
- * @param {Object} rule - rule of we expected
- */
-const adminRolesGenerator = (rule) => {
-  const ruleMiddleware = (req, res, next) => {
-    const rules = req.user.admin_roles;
-    if (!includes(rules, rule)) {
+const permissionGenerator = (permission) => {
+  const permissionMiddleware = (req, res, next) => {
+    const permissions = req.user.permissions;
+    if (!includes(permissions, permission)) {
       return forbiddenResponse(res);
     }
 
     next();
   };
 
-  return ruleMiddleware;
+  return permissionMiddleware;
 };
 
 module.exports = {
   hasLoggedIn,
-  isAdmin,
-  adminRoles: {
-    League: adminRolesGenerator('League'),
+  permissions: {
+    League: permissionGenerator('League'),
   },
 };
