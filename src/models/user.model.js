@@ -18,6 +18,7 @@ const schema = new mongoose.Schema(
       type: String,
       maxlength: 100,
       required: false,
+      default: '',
     },
     email: {
       type: String,

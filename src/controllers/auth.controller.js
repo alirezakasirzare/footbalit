@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 const BaseController = require('./_base.controller');
 
-class UserController extends BaseController {
+class AuthController extends BaseController {
   // for bcrypt
   bcryptSaltValue = 10;
   /**
@@ -62,5 +62,5 @@ class UserController extends BaseController {
   };
 }
 
-const userController = new UserController();
-module.exports = userController;
+const authController = new AuthController();
+module.exports = authController;

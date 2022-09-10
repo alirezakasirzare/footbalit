@@ -1,4 +1,3 @@
-const { validatorFeilds } = require('../config/validator.config');
 const BaseValidator = require('./_base.validator');
 
 class LeagueValidator extends BaseValidator {
