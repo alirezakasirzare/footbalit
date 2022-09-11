@@ -25,14 +25,11 @@ class LeagueController extends BaseController {
     const id = req.params.id;
     const getTeams = req.query.get_teams;
 
-    let result = null;
+    let getTeamsQuery = [];
+
+    // handle get_team query
     if (getTeams == 'true') {
-      result = await League.aggregate([
-        {
-          $match: {
-            _id: id,
-          },
-        },
+      getTeamsQuery = [
         {
           $addFields: {
             leagueId: {
@@ -51,12 +48,19 @@ class LeagueController extends BaseController {
         {
           $unset: 'leagueId',
         },
-      ]);
-      result = result.length > 0 ? result[0] : null;
-    } else {
-      result = await League.findById(id);
+      ];
     }
 
+    let query = [
+      {
+        $match: {
+          _id: id,
+        },
+      },
+    ];
+    query = query.concat(getTeamsQuery);
+    let result = await League.aggregate(query);
+    result = result.length > 0 ? result[0] : null;
     this.sendResponse(res, result);
   };
 
