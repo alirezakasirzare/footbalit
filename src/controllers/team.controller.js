@@ -1,4 +1,5 @@
 const Team = require('../models/team.model');
+const { createPartLookupId } = require('../utils/query.helper');
 const { checkObjectId } = require('../utils/validate.helper');
 const BaseController = require('./_base.controller');
 
@@ -34,26 +35,7 @@ class TeamController extends BaseController {
     // handle get_player query
     let getPlayerQuery = [];
     if (getPlayer == 'true') {
-      getPlayerQuery = [
-        {
-          $addFields: {
-            teamId: {
-              $toObjectId: '$_id',
-            },
-          },
-        },
-        {
-          $lookup: {
-            from: 'players',
-            localField: 'teamId',
-            foreignField: 'team',
-            as: 'players',
-          },
-        },
-        {
-          $unset: 'teamId',
-        },
-      ];
+      getPlayerQuery = createPartLookupId('teamId', 'team', 'players');
     }
 
     // execute query

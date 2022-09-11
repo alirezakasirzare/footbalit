@@ -1,4 +1,5 @@
 const League = require('../models/league.model');
+const { createPartLookupId } = require('../utils/query.helper');
 const BaseController = require('./_base.controller');
 
 class LeagueController extends BaseController {
@@ -28,26 +29,7 @@ class LeagueController extends BaseController {
     // handle get_team query
     let getTeamsQuery = [];
     if (getTeams == 'true') {
-      getTeamsQuery = [
-        {
-          $addFields: {
-            leagueId: {
-              $toObjectId: '$_id',
-            },
-          },
-        },
-        {
-          $lookup: {
-            from: 'teams',
-            localField: 'leagueId',
-            foreignField: 'league',
-            as: 'teams',
-          },
-        },
-        {
-          $unset: 'leagueId',
-        },
-      ];
+      getTeamsQuery = createPartLookupId('leagueId', 'league', 'teams');
     }
 
     // execute query
