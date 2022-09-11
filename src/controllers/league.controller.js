@@ -1,5 +1,5 @@
 const League = require('../models/league.model');
-const { createPartLookupId } = require('../utils/query.helper');
+const { createLookupMatchId, getOneItem } = require('../utils/query.helper');
 const BaseController = require('./_base.controller');
 
 class LeagueController extends BaseController {
@@ -26,24 +26,18 @@ class LeagueController extends BaseController {
     const id = req.params.id;
     const getTeams = req.query.get_teams;
 
-    // handle get_team query
-    let getTeamsQuery = [];
-    if (getTeams == 'true') {
-      getTeamsQuery = createPartLookupId('leagueId', 'league', 'teams');
-    }
+    // create query with handle get_team query
+    const query = createLookupMatchId(
+      id,
+      'leagueId',
+      'league',
+      'teams',
+      getTeams
+    );
 
-    // execute query
-    let query = [
-      {
-        $match: {
-          _id: id,
-        },
-      },
-    ];
-    query = query.concat(getTeamsQuery);
-    let result = await League.aggregate(query);
-    result = result.length > 0 ? result[0] : null;
-    this.sendResponse(res, result);
+    const result = await League.aggregate(query);
+    const singleResult = getOneItem(result);
+    this.sendResponse(res, singleResult);
   };
 
   /**

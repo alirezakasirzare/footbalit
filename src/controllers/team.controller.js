@@ -1,5 +1,5 @@
 const Team = require('../models/team.model');
-const { createPartLookupId } = require('../utils/query.helper');
+const { getOneItem, createLookupMatchId } = require('../utils/query.helper');
 const { checkObjectId } = require('../utils/validate.helper');
 const BaseController = require('./_base.controller');
 
@@ -32,29 +32,23 @@ class TeamController extends BaseController {
     const getPlayer = req.query.get_player;
     const getLeague = req.query.get_league;
 
-    // handle get_player query
-    let getPlayerQuery = [];
-    if (getPlayer == 'true') {
-      getPlayerQuery = createPartLookupId('teamId', 'team', 'players');
-    }
+    // create query with handle get_player query
+    const query = createLookupMatchId(
+      id,
+      'teamId',
+      'team',
+      'players',
+      getPlayer
+    );
 
-    // execute query
-    let query = [
-      {
-        $match: {
-          _id: id,
-        },
-      },
-    ];
-    query = query.concat(getPlayerQuery);
     let result = await Team.aggregate(query);
-    result = result.length > 0 ? result[0] : null;
+    let singleResult = getOneItem(result);
 
     // handle get_league query
-    if (getLeague == 'true' && result) {
-      result = await Team.populate(result, { path: 'league' });
+    if (getLeague == 'true' && singleResult) {
+      singleResult = await Team.populate(result, { path: 'league' });
     }
-    this.sendResponse(res, result);
+    this.sendResponse(res, singleResult);
   };
 
   /**
