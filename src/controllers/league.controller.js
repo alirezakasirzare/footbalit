@@ -16,12 +16,47 @@ class LeagueController extends BaseController {
   /**
    * Get one league
    *
+   * can show relation teams with set query get_teams=true
+   *
    * @param {Object} req - express request
    * @param {Object} res - express response
    */
   get = async (req, res) => {
     const id = req.params.id;
-    const result = await League.findById(id);
+    const getTeams = req.query.get_teams;
+
+    let result = null;
+    if (getTeams == 'true') {
+      result = await League.aggregate([
+        {
+          $match: {
+            _id: id,
+          },
+        },
+        {
+          $addFields: {
+            leagueId: {
+              $toObjectId: '$_id',
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: 'teams',
+            localField: 'leagueId',
+            foreignField: 'league',
+            as: 'teams',
+          },
+        },
+        {
+          $unset: 'leagueId',
+        },
+      ]);
+      result = result.length > 0 ? result[0] : null;
+    } else {
+      result = await League.findById(id);
+    }
+
     this.sendResponse(res, result);
   };
 
