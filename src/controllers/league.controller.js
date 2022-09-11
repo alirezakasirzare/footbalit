@@ -25,9 +25,8 @@ class LeagueController extends BaseController {
     const id = req.params.id;
     const getTeams = req.query.get_teams;
 
-    let getTeamsQuery = [];
-
     // handle get_team query
+    let getTeamsQuery = [];
     if (getTeams == 'true') {
       getTeamsQuery = [
         {
@@ -51,6 +50,7 @@ class LeagueController extends BaseController {
       ];
     }
 
+    // execute query
     let query = [
       {
         $match: {

@@ -31,14 +31,10 @@ class TeamController extends BaseController {
     const getPlayer = req.query.get_player;
     const getLeague = req.query.get_league;
 
-    let result = null;
+    // handle get_player query
+    let getPlayerQuery = [];
     if (getPlayer == 'true') {
-      result = await Team.aggregate([
-        {
-          $match: {
-            _id: id,
-          },
-        },
+      getPlayerQuery = [
         {
           $addFields: {
             teamId: {
@@ -57,20 +53,25 @@ class TeamController extends BaseController {
         {
           $unset: 'teamId',
         },
-      ]);
-
-      result = result.length > 0 ? result[0] : null;
-      if (getLeague == 'true' && result) {
-        result = await Team.populate(result, { path: 'league' });
-      }
-    } else {
-      let query = Team.findById(id);
-      if (getLeague == 'true') {
-        query = query.populate('league');
-      }
-      result = await query;
+      ];
     }
 
+    // execute query
+    let query = [
+      {
+        $match: {
+          _id: id,
+        },
+      },
+    ];
+    query = query.concat(getPlayerQuery);
+    let result = await Team.aggregate(query);
+    result = result.length > 0 ? result[0] : null;
+
+    // handle get_league query
+    if (getLeague == 'true' && result) {
+      result = await Team.populate(result, { path: 'league' });
+    }
     this.sendResponse(res, result);
   };
 
