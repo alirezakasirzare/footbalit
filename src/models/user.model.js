@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const timestamps = require('mongoose-timestamp');
+const { roles } = require('../config/permissions.config');
 
 // league schema
 const schema = new mongoose.Schema(
@@ -33,7 +34,7 @@ const schema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['USER', 'ADMIN', 'SUPER_ADMIN'],
+      enum: roles,
       default: 'USER',
     },
     permissions: {

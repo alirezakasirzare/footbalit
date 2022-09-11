@@ -10,6 +10,11 @@ const validatorMessages = {
 
   email: '{field} باید ایمیل معتبری باشد',
   emailMax: '{field} نباید بیشتر از {expected} کاراکتر باشد',
+
+  enumValue: '{field} معتیر نیست',
+  arrayEnum: '{field} معتیر نیست',
+
+  array: '{field} باید یک لیست باشد',
 };
 
 // validator labels
@@ -22,6 +27,9 @@ const validatorLabels = {
   email: 'ایمیل',
   password: 'رمز',
   confrim_password: 'تایید رمز',
+  user_email: 'ایمیل کاربر',
+  role: 'نقش کاربر',
+  permissions: 'لیست دسترسی ها',
 };
 
 module.exports = {

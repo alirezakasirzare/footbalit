@@ -1,18 +1,38 @@
 // all exists permissions
-const permissions = ['Leauge', 'admin-panel'];
+const permissions = ['League', 'admin-panel', 'Admin'];
+
+// roles
+const roles = ['USER', 'ADMIN', 'SUPER_ADMIN'];
 
 // user permissions
 const userPermissions = [];
 
 // admin permissions
-const adminPermissions = ['Leauge', 'admin-panel'];
+const adminPermissions = ['League', 'admin-panel'];
 
 // super admin permissions
-const superAdminPermissions = ['Leauge', 'admin-panel'];
+const superAdminPermissions = ['League', 'admin-panel', 'Admin'];
 
-exports.default = {
+/**
+ * Return all permissions belonging to a specific role
+ *
+ * @param {role} req - the role of user
+ */
+const getPermissions = (role) => {
+  switch (role) {
+    case 'USER':
+      return userPermissions;
+
+    case 'ADMIN':
+      return adminPermissions;
+
+    case 'SUPER_ADMIN':
+      return superAdminPermissions;
+  }
+};
+
+module.exports = {
   allPermissions: permissions,
-  userPermissions,
-  adminPermissions,
-  superAdminPermissions,
+  roles,
+  getPermissions,
 };

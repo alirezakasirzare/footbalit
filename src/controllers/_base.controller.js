@@ -5,6 +5,19 @@ const {
 
 class BaseController {
   /**
+   * Send not found error for client
+   *
+   * @param {Object} res - express response
+   */
+  sendResponse404 = (res) => {
+    const error = {
+      _message: 'یافت نشد',
+    };
+    const response = errorResponse(error);
+    return res.status(404).json(response);
+  };
+
+  /**
    * Send not found error response if data is null, send success response if data exist
    *
    * @param {Object} res - express response
@@ -14,11 +27,7 @@ class BaseController {
   sendResponse = (res, data, code = 200) => {
     if (code >= 200 && code < 299) {
       if (!data) {
-        const error = {
-          _message: 'یافت نشد',
-        };
-        const response = errorResponse(error);
-        return res.status(404).json(response);
+        return this.sendResponse404(res);
       }
 
       const response = successResponse(data);

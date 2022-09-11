@@ -97,5 +97,6 @@ module.exports = {
   hasLoggedIn,
   permissions: {
     League: permissionGenerator('League'),
+    Admin: permissionGenerator('Admin'),
   },
 };
