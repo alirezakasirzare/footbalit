@@ -33,6 +33,7 @@ const validatorLabels = {
   role: 'نقش کاربر',
   permissions: 'لیست دسترسی ها',
   league: 'لیگ',
+  team: 'تیم',
 };
 
 module.exports = {

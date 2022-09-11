@@ -1,5 +1,5 @@
 // all exists permissions
-const permissions = ['League', 'Team', 'Admin', 'admin-panel'];
+const permissions = ['League', 'Team', 'Player', 'Admin', 'admin-panel'];
 
 // roles
 const roles = ['USER', 'ADMIN', 'SUPER_ADMIN'];
@@ -8,10 +8,16 @@ const roles = ['USER', 'ADMIN', 'SUPER_ADMIN'];
 const userPermissions = [];
 
 // admin permissions
-const adminPermissions = ['League', 'Team', 'admin-panel'];
+const adminPermissions = ['League', 'Team', 'Player', 'admin-panel'];
 
 // super admin permissions
-const superAdminPermissions = ['League', 'Team', 'Admin', 'admin-panel'];
+const superAdminPermissions = [
+  'League',
+  'Team',
+  'Player',
+  'Admin',
+  'admin-panel',
+];
 
 /**
  * Return all permissions belonging to a specific role

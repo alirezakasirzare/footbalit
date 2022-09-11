@@ -99,5 +99,6 @@ module.exports = {
     League: permissionGenerator('League'),
     Admin: permissionGenerator('Admin'),
     Team: permissionGenerator('Team'),
+    Player: permissionGenerator('Player'),
   },
 };
