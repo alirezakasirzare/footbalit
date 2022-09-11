@@ -21,19 +21,56 @@ class TeamController extends BaseController {
    * Get one team
    *
    * can get league too with set query get_league=true
+   * can get players too with set query get_player=true
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
    */
   getOne = async (req, res) => {
     const id = req.params.id;
+    const getPlayer = req.query.get_player;
     const getLeague = req.query.get_league;
 
-    let query = Team.findById(id);
-    if (getLeague == 'true') {
-      query = query.populate('league');
+    let result = null;
+    if (getPlayer == 'true') {
+      result = await Team.aggregate([
+        {
+          $match: {
+            _id: id,
+          },
+        },
+        {
+          $addFields: {
+            teamId: {
+              $toObjectId: '$_id',
+            },
+          },
+        },
+        {
+          $lookup: {
+            from: 'players',
+            localField: 'teamId',
+            foreignField: 'team',
+            as: 'players',
+          },
+        },
+        {
+          $unset: 'teamId',
+        },
+      ]);
+
+      result = result.length > 0 ? result[0] : null;
+      if (getLeague == 'true' && result) {
+        result = await Team.populate(result, { path: 'league' });
+      }
+    } else {
+      let query = Team.findById(id);
+      if (getLeague == 'true') {
+        query = query.populate('league');
+      }
+      result = await query;
     }
-    const result = await query;
+
     this.sendResponse(res, result);
   };
 
