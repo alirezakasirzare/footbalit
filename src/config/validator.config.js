@@ -34,6 +34,7 @@ const validatorLabels = {
   permissions: 'لیست دسترسی ها',
   league: 'لیگ',
   team: 'تیم',
+  cups: 'جام ها',
 };
 
 module.exports = {

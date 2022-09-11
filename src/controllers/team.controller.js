@@ -29,8 +29,11 @@ class TeamController extends BaseController {
    */
   getOne = async (req, res) => {
     const id = req.params.id;
-    const getPlayer = req.query.get_player;
-    const getLeague = req.query.get_league;
+    const {
+      get_player: getPlayer,
+      get_league: getLeague,
+      get_cups: getCups,
+    } = req.query;
 
     // create query with handle get_player query
     const query = createLookupMatchId(
@@ -46,9 +49,16 @@ class TeamController extends BaseController {
 
     // handle get_league query
     if (getLeague == 'true' && singleResult) {
-      singleResult = await Team.populate(result, { path: 'league' });
+      singleResult = Team.populate(result, { path: 'league' });
     }
-    this.sendResponse(res, singleResult);
+
+    // handle get_cups query
+    if (getCups == 'true' && singleResult) {
+      singleResult = Team.populate(result, { path: 'cups' });
+    }
+
+    const finalResult = await singleResult;
+    this.sendResponse(res, finalResult);
   };
 
   /**

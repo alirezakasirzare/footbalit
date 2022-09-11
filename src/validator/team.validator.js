@@ -13,6 +13,7 @@ class TeamValidator extends BaseValidator {
       persian_name: { type: 'string', max: 100 },
       english_name: { type: 'string', max: 100 },
       league: { type: 'objectID' },
+      cups: { type: 'array', items: 'objectID' },
     };
 
     this.checkValidation(req, res, next, rules);
