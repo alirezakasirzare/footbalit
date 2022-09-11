@@ -1,4 +1,4 @@
-const { getPermissions } = require('../config/permissions.config');
+const { getPermissions } = require('../config/roles.config');
 const User = require('../models/user.model');
 const BaseController = require('./_base.controller');
 

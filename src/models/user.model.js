@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const timestamps = require('mongoose-timestamp');
-const { roles } = require('../config/permissions.config');
+const { roles } = require('../config/roles.config');
 
-// league schema
+// user schema
 const schema = new mongoose.Schema(
   {
     _id: {

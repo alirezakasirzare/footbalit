@@ -15,6 +15,8 @@ const validatorMessages = {
   arrayEnum: '{field} معتیر نیست',
 
   array: '{field} باید یک لیست باشد',
+
+  objectID: '{field} باید آیدی معتبری باشد',
 };
 
 // validator labels
@@ -30,6 +32,7 @@ const validatorLabels = {
   user_email: 'ایمیل کاربر',
   role: 'نقش کاربر',
   permissions: 'لیست دسترسی ها',
+  league: 'لیگ',
 };
 
 module.exports = {

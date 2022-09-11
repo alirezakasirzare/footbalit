@@ -1,5 +1,5 @@
 const BaseValidator = require('./_base.validator');
-const { allPermissions, roles } = require('../config/permissions.config');
+const { allPermissions, roles } = require('../config/roles.config');
 
 class AdminValidator extends BaseValidator {
   /**
