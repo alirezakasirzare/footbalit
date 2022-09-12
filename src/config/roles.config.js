@@ -1,5 +1,13 @@
 // all exists permissions
-const permissions = ['League', 'Team', 'Player', 'Cup', 'Admin', 'admin-panel'];
+const permissions = [
+  'League',
+  'Team',
+  'Player',
+  'Cup',
+  'Course',
+  'Admin',
+  'admin-panel',
+];
 
 // roles
 const roles = ['USER', 'ADMIN', 'SUPER_ADMIN'];
@@ -8,7 +16,14 @@ const roles = ['USER', 'ADMIN', 'SUPER_ADMIN'];
 const userPermissions = [];
 
 // admin permissions
-const adminPermissions = ['League', 'Team', 'Player', 'Cup', 'admin-panel'];
+const adminPermissions = [
+  'League',
+  'Team',
+  'Player',
+  'Cup',
+  'Course',
+  'admin-panel',
+];
 
 // super admin permissions
 const superAdminPermissions = [
@@ -16,6 +31,7 @@ const superAdminPermissions = [
   'Team',
   'Player',
   'Cup',
+  'Course',
   'Admin',
   'admin-panel',
 ];

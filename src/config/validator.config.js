@@ -6,6 +6,10 @@ const validatorMessages = {
   stringMin: '{field} نباید کمتر از {expected} کاراکتر باشد',
   string: '{field} باید متن باشد',
 
+  number: '{field} باید عدد باشد',
+  numberMax: '{field} نباید بیشتر از {expected} باشد',
+  numberMin: '{field} نباید کمتر از {expected} باشد',
+
   equalField: '{field} باید با فیلد رمز برابر باشد', //this expected is static -> if you need you should change this latter
 
   email: '{field} باید ایمیل معتبری باشد',
@@ -35,6 +39,8 @@ const validatorLabels = {
   league: 'لیگ',
   team: 'تیم',
   cups: 'جام ها',
+  name: 'اسم',
+  number: 'شماره',
 };
 
 module.exports = {
