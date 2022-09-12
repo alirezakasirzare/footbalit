@@ -13,6 +13,7 @@ class LeagueValidator extends BaseValidator {
       persian_name: { type: 'string', max: 100 },
       english_name: { type: 'string', max: 100 },
       country: { type: 'string', max: 100 },
+      course: { type: 'objectID' },
     };
 
     this.checkValidation(req, res, next, rules);
@@ -30,6 +31,7 @@ class LeagueValidator extends BaseValidator {
       persian_name: { type: 'string', max: 100, optional: true },
       english_name: { type: 'string', max: 100, optional: true },
       country: { type: 'string', max: 100, optional: true },
+      course: { type: 'objectID', optional: true },
     };
 
     this.checkValidation(req, res, next, rules);

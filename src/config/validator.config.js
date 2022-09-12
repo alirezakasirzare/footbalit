@@ -41,6 +41,7 @@ const validatorLabels = {
   cups: 'جام ها',
   name: 'اسم',
   number: 'شماره',
+  course: 'دوره',
 };
 
 module.exports = {

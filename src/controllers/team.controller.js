@@ -49,12 +49,12 @@ class TeamController extends BaseController {
 
     // handle get_league query
     if (getLeague == 'true' && singleResult) {
-      singleResult = Team.populate(result, { path: 'league' });
+      singleResult = Team.populate(singleResult, { path: 'league' });
     }
 
     // handle get_cups query
     if (getCups == 'true' && singleResult) {
-      singleResult = Team.populate(result, { path: 'cups' });
+      singleResult = Team.populate(singleResult, { path: 'cups' });
     }
 
     const finalResult = await singleResult;
