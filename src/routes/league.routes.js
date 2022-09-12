@@ -8,7 +8,7 @@ const leagueRoutes = express.Router();
 leagueRoutes.get('/', leagueController.getAll);
 
 // GET get one league
-leagueRoutes.get('/:id', leagueController.get);
+leagueRoutes.get('/:id', leagueController.getOne);
 
 // POST create one league
 leagueRoutes.post(

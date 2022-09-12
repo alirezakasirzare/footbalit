@@ -18,11 +18,12 @@ class LeagueController extends BaseController {
    * Get one league
    *
    * can show relation teams with set query get_teams=true
+   * can show curent course with set query get_course=true
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
    */
-  get = async (req, res) => {
+  getOne = async (req, res) => {
     const id = req.params.id;
     const { get_teams: getTeams, get_course: getCourse } = req.query;
 
