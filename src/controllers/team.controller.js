@@ -1,5 +1,4 @@
 const Team = require('../models/team.model');
-const { getOneItem, createLookupMatchId } = require('../utils/query.helper');
 const { checkObjectId } = require('../utils/validate.helper');
 const BaseController = require('./_base.controller');
 
@@ -22,43 +21,30 @@ class TeamController extends BaseController {
    * Get one team
    *
    * can get league too with set query get_league=true
-   * can get players too with set query get_player=true
+   * can get cups too with set query get_cups=true
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
    */
   getOne = async (req, res) => {
     const id = req.params.id;
-    const {
-      get_player: getPlayer,
-      get_league: getLeague,
-      get_cups: getCups,
-    } = req.query;
+    const { get_league: getLeague, get_cups: getCups } = req.query;
 
-    // create query with handle get_player query
-    const query = createLookupMatchId(
-      id,
-      'teamId',
-      'team',
-      'players',
-      getPlayer
-    );
-
-    let result = await Team.aggregate(query);
-    let singleResult = getOneItem(result);
+    let query = Team.findById(id);
 
     // handle get_league query
-    if (getLeague == 'true' && singleResult) {
-      singleResult = Team.populate(singleResult, { path: 'league' });
+    if (getLeague == 'true') {
+      query = query.populate('league');
     }
 
     // handle get_cups query
-    if (getCups == 'true' && singleResult) {
-      singleResult = Team.populate(singleResult, { path: 'cups' });
+    if (getCups == 'true') {
+      query = query.populate('cups');
     }
 
-    const finalResult = await singleResult;
-    this.sendResponse(res, finalResult);
+    // execute query
+    const result = await query;
+    this.sendResponse(res, result);
   };
 
   /**

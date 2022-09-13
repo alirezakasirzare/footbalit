@@ -1,5 +1,4 @@
 const League = require('../models/league.model');
-const { createLookupMatchId, getOneItem } = require('../utils/query.helper');
 const BaseController = require('./_base.controller');
 
 class LeagueController extends BaseController {
@@ -17,7 +16,6 @@ class LeagueController extends BaseController {
   /**
    * Get one league
    *
-   * can show relation teams with set query get_teams=true
    * can show curent course with set query get_course=true
    *
    * @param {Object} req - express request
@@ -25,26 +23,18 @@ class LeagueController extends BaseController {
    */
   getOne = async (req, res) => {
     const id = req.params.id;
-    const { get_teams: getTeams, get_course: getCourse } = req.query;
+    const getCourse = req.query.get_course;
 
-    // create query with handle get_team query
-    const query = createLookupMatchId(
-      id,
-      'leagueId',
-      'league',
-      'teams',
-      getTeams
-    );
-
-    const result = await League.aggregate(query);
-    let singleResult = getOneItem(result);
+    let query = League.findById(id);
 
     // handle get_course query
-    if (getCourse == 'true' && singleResult) {
-      singleResult = await League.populate(singleResult, { path: 'course' });
+    if (getCourse == 'true') {
+      query = query.populate('course');
     }
 
-    this.sendResponse(res, singleResult);
+    // execute query
+    const result = await query;
+    this.sendResponse(res, result);
   };
 
   /**
