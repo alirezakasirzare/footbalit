@@ -21,6 +21,8 @@ const validatorMessages = {
   array: '{field} باید یک لیست باشد',
 
   objectID: '{field} باید آیدی معتبری باشد',
+
+  date: '{field} باید تاریخ معتبری باشد',
 };
 
 // validator labels
@@ -42,6 +44,10 @@ const validatorLabels = {
   name: 'اسم',
   number: 'شماره',
   course: 'دوره',
+  team_one: 'تیم اول',
+  team_two: 'تیم دوم',
+  date: 'تاریخ',
+  status: 'وضعیت',
 };
 
 module.exports = {

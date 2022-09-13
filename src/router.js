@@ -7,6 +7,7 @@ const teamRoutes = require('./routes/team.routes');
 const playerRoutes = require('./routes/player.routes');
 const cupRoutes = require('./routes/cup.routes');
 const courseRoutes = require('./routes/course.routes');
+const gameRoutes = require('./routes/game.routes');
 const Router = express.Router();
 
 // league routes
@@ -23,6 +24,9 @@ Router.use('/cup', cupRoutes);
 
 // course routes
 Router.use('/course', courseRoutes);
+
+// game routes
+Router.use('/game', gameRoutes);
 
 // auth routes
 Router.use('/auth', authRoutes);

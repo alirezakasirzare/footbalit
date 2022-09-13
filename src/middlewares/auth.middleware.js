@@ -102,5 +102,6 @@ module.exports = {
     Player: permissionGenerator('Player'),
     Cup: permissionGenerator('Cup'),
     Course: permissionGenerator('Course'),
+    Game: permissionGenerator('Game'),
   },
 };
