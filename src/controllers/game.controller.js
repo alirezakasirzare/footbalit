@@ -1,3 +1,4 @@
+const Event = require('../models/event.model');
 const Game = require('../models/game.model');
 const BaseController = require('./_base.controller');
 
@@ -50,6 +51,32 @@ class GameController extends BaseController {
     for (let key in body) {
       const value = body[key];
       game && (game[key] = value);
+    }
+
+    // if status is ended so add the ended info to game
+    if (game && game.status == 'ended') {
+      const events = await Event.find({ game: game.id });
+
+      // handel goals
+      events.forEach((event) => {
+        if (
+          event.type == 'goal' ||
+          (event.type == 'penalty' && event.data.goaled == true)
+        ) {
+          game[
+            game.team_one.equals(event.team)
+              ? 'team_one_goals'
+              : 'team_two_goals'
+          ] += 1;
+        }
+      });
+
+      // handel winner
+      if (game.team_one_goals > game.team_two_goals) {
+        game.winner = game.team_one;
+      } else if (game.team_one_goals < game.team_two_goals) {
+        game.winner = game.team_two;
+      }
     }
 
     // save document
