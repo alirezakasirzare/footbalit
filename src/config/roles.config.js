@@ -5,6 +5,8 @@ const permissions = [
   'Player',
   'Cup',
   'Course',
+  'Game',
+  'Event',
   'Admin',
   'admin-panel',
 ];
@@ -22,6 +24,8 @@ const adminPermissions = [
   'Player',
   'Cup',
   'Course',
+  'Game',
+  'Event',
   'admin-panel',
 ];
 
@@ -32,6 +36,8 @@ const superAdminPermissions = [
   'Player',
   'Cup',
   'Course',
+  'Game',
+  'Event',
   'Admin',
   'admin-panel',
 ];
