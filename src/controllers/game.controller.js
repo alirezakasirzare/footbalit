@@ -52,116 +52,62 @@ class GameController extends BaseController {
   /**
    * Get one game
    *
+   * can show league by set query get_league=true
+   * can show course by set query get_course=true
+   *
    * @param {Object} req - express request
    * @param {Object} res - express response
    */
   getOne = async (req, res) => {
     const id = req.params.id;
-    const result = await Game.findById(id)
-      .populate('team_one')
-      .populate('team_two');
+    let { get_league: getLeague, get_course: getCourse } = req.query;
+
+    const query = Game.findById(id).populate('team_one').populate('team_two');
+
+    // handle get_league query
+    if (getLeague == 'true') {
+      query.populate('league');
+    }
+
+    // handle get_course query
+    if (getCourse == 'true') {
+      query.populate('course');
+    }
+
+    // execute query
+    const result = await query;
     this.sendResponse(res, result);
   };
 
   /**
-   * Get all games
+   * Get all games and sort by date
    *
-   * can filter by date with set days=3,4 three day before and four day after (with today)
-   * by default it is 5,6
+   * can filter by date with set date=2020-04-03 by default get today games
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
    */
   getAll = async (req, res) => {
-    let date = req.query.days;
+    let date = req.query.date;
 
-    // handle days query
-    date = date.split(',');
-    const queryStartsDay = parseInt(date[0] || 5);
-    const queryEndsDay = parseInt(date[1] || 6);
-    const cureentDate = new Date().getTime();
+    // handle date query
     const oneDay = 24 * 60 * 60 * 1000;
+    const timedDate = date ? new Date(date).getTime() : new Date().getTime();
 
-    let startDate = cureentDate - oneDay * queryStartsDay;
-    startDate = Math.floor(startDate / oneDay) * oneDay;
+    const startDate = Math.floor(timedDate / oneDay) * oneDay;
+    const endDate = Math.floor((timedDate + oneDay) / oneDay) * oneDay;
 
-    let endDate = cureentDate + oneDay * queryEndsDay;
-    endDate = Math.floor(endDate / oneDay) * oneDay;
-
-    // exequte query
+    // execute query
     const result = await Game.find({
       date: {
         $gte: startDate,
         $lt: endDate,
       },
     })
-      // .sort({ date: 1 })
+      .sort({ date: 1 })
       .populate('team_one')
       .populate('team_two');
-    // let result = await Game.aggregate([
-    //   {
-    //     $match: {
-    //       date: {
-    //         $gte: new Date(startDate),
-    //         $lt: new Date(endDate),
-    //       },
-    //     },
-    //   },
-    //   { $sort: { date: 1 } },
-    //   {
-    //     $group: {
-    //       _id: {
-    //         year: { $year: '$date' },
-    //         month: { $month: '$date' },
-    //         day: { $dayOfMonth: '$date' },
-    //         formattedDateString: {
-    //           $dateToString: {
-    //             format: '%Y-%m-%d',
-    //             date: '$date',
-    //           },
-    //         },
-    //       },
-    //       data: { $push: '$$ROOT' },
-    //       count: { $sum: 1 },
-    //     },
-    //   },
-    //   {
-    //     $project: {
-    //       datetime: {
-    //         $concat: [
-    //           {
-    //             $substr: ['$_id.year', 0, -1],
-    //           },
-    //           '-',
-    //           {
-    //             $substr: ['$_id.month', 0, -1],
-    //           },
-    //           '-',
-    //           {
-    //             $substr: ['$_id.day', 0, -1],
-    //           },
-    //         ],
-    //       },
-    //       data: 1,
-    //       _id: 0,
-    //       count: 1,
-    //     },
-    //   },
-    //   { $sort: { datetime: 1 } },
-    //   {
-    //     $set: {
-    //       isToday: {
-    //         $eq: [
-    //           '$datetime',
-    //           new Date(cureentDate).toJSON().split('T')[0].replace(/\b0/g, ''),
-    //         ],
-    //       },
-    //     },
-    //   },
-    // ]);
 
-    // result = await Game.populate(result, { path: 'data.team_one' });
-    // result = await Game.populate(result, { path: 'data.team_two' });
     this.sendResponse(res, result);
   };
 }
