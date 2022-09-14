@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { split, includes } = require('lodash');
+const { allPermissions } = require('../config/roles.config');
 const User = require('../models/user.model');
 const { errorResponse } = require('../utils/structureResponse.helper');
 
@@ -93,16 +94,13 @@ const permissionGenerator = (permission) => {
   return permissionMiddleware;
 };
 
+// dynamic handle permissions
+const permissions = {};
+allPermissions.forEach((item) => {
+  permissions[item] = permissionGenerator(item);
+});
+
 module.exports = {
   hasLoggedIn,
-  permissions: {
-    League: permissionGenerator('League'),
-    Admin: permissionGenerator('Admin'),
-    Team: permissionGenerator('Team'),
-    Player: permissionGenerator('Player'),
-    Cup: permissionGenerator('Cup'),
-    Course: permissionGenerator('Course'),
-    Game: permissionGenerator('Game'),
-    Event: permissionGenerator('Event'),
-  },
+  permissions,
 };
