@@ -23,6 +23,8 @@ const validatorMessages = {
   objectID: '{field} باید آیدی معتبری باشد',
 
   date: '{field} باید تاریخ معتبری باشد',
+
+  object: '{field} باید یک آبجکت باشد',
 };
 
 // validator labels
@@ -48,6 +50,10 @@ const validatorLabels = {
   team_two: 'تیم دوم',
   date: 'تاریخ',
   status: 'وضعیت',
+  minute: 'دقیقه',
+  data: 'اطلاعات',
+  game: 'بازی',
+  type: 'نوع',
 };
 
 module.exports = {
