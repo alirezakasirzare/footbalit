@@ -37,15 +37,23 @@ class GameController extends BaseController {
   update = async (req, res) => {
     const id = req.params.id;
     const body = req.body;
-    const result = await Game.findByIdAndUpdate(
-      id,
-      {
-        $set: body,
-      },
-      {
-        new: true,
-      }
-    );
+
+    // if status is ended so return
+    const game = await Game.findById(id);
+    if (game && game.status == 'ended') {
+      const msg =
+        'این بازی تمام شده است و دیگر نمیتوانید آن را به روز رسانی کنید';
+      return this.sendResponseMeg(res, msg, 400);
+    }
+
+    // asing body to game document
+    for (let key in body) {
+      const value = body[key];
+      game && (game[key] = value);
+    }
+
+    // save document
+    const result = game && (await game.save());
     this.sendResponse(res, result);
   };
 
