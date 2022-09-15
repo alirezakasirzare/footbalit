@@ -28,7 +28,7 @@ newsRoutes.delete('/:id', hasLoggedIn, permissions.News, newsController.delete);
 // GET get one team
 newsRoutes.get('/:id', newsController.getOne);
 
-// // GET search enws
-// newsRoutes.get('/', newsController.getAll);
+// GET all enws
+newsRoutes.get('/', newsController.getAll);
 
 module.exports = newsRoutes;

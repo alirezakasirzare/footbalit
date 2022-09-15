@@ -61,6 +61,27 @@ class NewsController extends BaseController {
     let result = await News.findById(id);
     this.sendResponse(res, result);
   };
+
+  /**
+   * Get all news
+   *
+   * can filter by tag with set q query
+   *
+   * @param {Object} req - express request
+   * @param {Object} res - express response
+   */
+  getAll = async (req, res) => {
+    const q = req.query.q;
+
+    // handle q query
+    let queryFilter = {};
+    if (q) {
+      queryFilter.tags = { $regex: q, $options: 'i' };
+    }
+
+    const result = await News.find(queryFilter);
+    this.sendResponse(res, result);
+  };
 }
 
 const newsController = new NewsController();
