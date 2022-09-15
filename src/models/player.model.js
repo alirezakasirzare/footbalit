@@ -19,7 +19,7 @@ const schema = new mongoose.Schema(
       maxlength: 100,
       required: true,
     },
-    team: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
+    team: { type: String, ref: 'Team' },
   },
   {
     _id: false,

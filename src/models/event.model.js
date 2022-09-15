@@ -9,8 +9,8 @@ const schema = new mongoose.Schema(
       unique: true,
       default: mongoose.Types.ObjectId,
     },
-    game: { type: mongoose.Schema.Types.ObjectId, ref: 'Game' },
-    team: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
+    game: { type: String, ref: 'Game' },
+    team: { type: String, ref: 'Team' },
     type: {
       type: String,
       enum: ['goal', 'change-player', 'card', 'penalty'],

@@ -9,9 +9,9 @@ const schema = new mongoose.Schema(
       unique: true,
       default: mongoose.Types.ObjectId,
     },
-    team: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
-    league: { type: mongoose.Schema.Types.ObjectId, ref: 'League' },
-    course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
+    team: { type: String, ref: 'Team' },
+    league: { type: String, ref: 'League' },
+    course: { type: String, ref: 'Course' },
     score: {
       type: Number,
       min: 0,

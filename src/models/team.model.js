@@ -19,7 +19,7 @@ const schema = new mongoose.Schema(
       maxlength: 100,
       required: true,
     },
-    cups: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cup' }],
+    cups: [{ type: String, ref: 'Cup' }],
     league: { type: String, ref: 'League' },
   },
   {

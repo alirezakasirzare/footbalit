@@ -24,7 +24,7 @@ const schema = new mongoose.Schema(
       maxlength: 100,
       required: true,
     },
-    course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
+    course: { type: String, ref: 'Course' },
   },
   {
     _id: false,
