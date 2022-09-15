@@ -42,7 +42,7 @@ const validatorLabels = {
   permissions: 'لیست دسترسی ها',
   league: 'لیگ',
   team: 'تیم',
-  cups: 'جام ها',
+  cups: 'لیست جام ها',
   name: 'اسم',
   number: 'شماره',
   course: 'دوره',
@@ -54,6 +54,10 @@ const validatorLabels = {
   data: 'اطلاعات',
   game: 'بازی',
   type: 'نوع',
+  title: 'عنوان',
+  text: 'متن',
+  source: 'منبع',
+  tags: 'لیست تگ ها',
 };
 
 module.exports = {

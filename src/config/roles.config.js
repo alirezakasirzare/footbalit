@@ -7,6 +7,7 @@ const permissions = [
   'Course',
   'Game',
   'Event',
+  'News',
   'Admin',
   'admin-panel',
 ];
@@ -26,6 +27,7 @@ const adminPermissions = [
   'Course',
   'Game',
   'Event',
+  'News',
   'admin-panel',
 ];
 
@@ -38,6 +40,7 @@ const superAdminPermissions = [
   'Course',
   'Game',
   'Event',
+  'News',
   'Admin',
   'admin-panel',
 ];
