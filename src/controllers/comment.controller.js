@@ -51,13 +51,14 @@ class CommentController extends BaseController {
   getAll = async (req, res) => {
     const newsId = req.query.news;
 
-    // handle q query
+    // handle news query
     let queryFilter = {};
     if (newsId) {
       queryFilter.news = newsId;
     }
 
-    const result = await Comment.find(queryFilter);
+    // execute query
+    const result = await Comment.find(queryFilter).populate('user');
     this.sendResponse(res, result);
   };
 }

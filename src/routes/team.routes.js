@@ -25,7 +25,7 @@ teamRoutes.put(
 // DELETE delete one team
 teamRoutes.delete('/:id', hasLoggedIn, permissions.Team, teamController.delete);
 
-// GET get all teams
+// GET get one teams
 teamRoutes.get('/:id', teamController.getOne);
 
 // GET create all teams
