@@ -1,5 +1,6 @@
 const Event = require('../models/event.model');
 const Game = require('../models/game.model');
+const LeagueInfo = require('../models/leagueInfo.model');
 const BaseController = require('./_base.controller');
 
 class GameController extends BaseController {
@@ -56,6 +57,8 @@ class GameController extends BaseController {
     // if status is ended so add the ended info to game
     if (game && game.status == 'ended') {
       const events = await Event.find({ game: game.id });
+      let teamOneScore = 1;
+      let teamTwoScore = 1;
 
       // handel goals
       events.forEach((event) => {
@@ -74,9 +77,42 @@ class GameController extends BaseController {
       // handel winner
       if (game.team_one_goals > game.team_two_goals) {
         game.winner = game.team_one;
+        teamOneScore = 3;
+        teamTwoScore = 0;
       } else if (game.team_one_goals < game.team_two_goals) {
         game.winner = game.team_two;
+        teamOneScore = 0;
+        teamTwoScore = 3;
       }
+
+      // handle league info
+      await LeagueInfo.findOneAndUpdate(
+        { league: game.league, course: game.course, team: game.team_one },
+        {
+          $inc: {
+            goals_scored: game.team_one_goals,
+            score_received: game.team_two_goals,
+            score: teamOneScore,
+          },
+        },
+        {
+          upsert: true,
+        }
+      );
+
+      await LeagueInfo.findOneAndUpdate(
+        { league: game.league, course: game.course, team: game.team_two },
+        {
+          $inc: {
+            goals_scored: game.team_two_goals,
+            score_received: game.team_one_goals,
+            score: teamTwoScore,
+          },
+        },
+        {
+          upsert: true,
+        }
+      );
     }
 
     // save document

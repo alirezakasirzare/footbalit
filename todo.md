@@ -7,3 +7,5 @@
 # handle cup[0] validator text
 
 # forget password
+
+# change objetc id to string in all models

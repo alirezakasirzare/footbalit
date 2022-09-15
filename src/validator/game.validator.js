@@ -36,6 +36,7 @@ class GameValidator extends BaseValidator {
       status: {
         type: 'enum',
         values: ['ended', 'started', 'not started', 'suspended'],
+        optional: true,
       },
       date: { type: 'date', convert: true, optional: true },
     };
