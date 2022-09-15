@@ -20,7 +20,7 @@ const schema = new mongoose.Schema(
       required: true,
     },
     cups: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cup' }],
-    league: { type: mongoose.Schema.Types.ObjectId, ref: 'League' },
+    league: { type: String, ref: 'League' },
   },
   {
     _id: false,

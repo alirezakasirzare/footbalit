@@ -1,4 +1,5 @@
 const Team = require('../models/team.model');
+const League = require('../models/league.model');
 const { checkObjectId } = require('../utils/validate.helper');
 const BaseController = require('./_base.controller');
 
@@ -51,19 +52,67 @@ class TeamController extends BaseController {
    * Get all teams
    *
    * can get filter by league with set query league
+   * can get info with set get_info query
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
    */
   getAll = async (req, res) => {
-    const leagueId = req.query.league;
+    const { league: leagueId, get_info: getInfo } = req.query;
 
-    let queryFilter = {};
+    let queryFilter = [
+      {
+        $project: {
+          persian_name: 1,
+          league: 1,
+        },
+      },
+    ];
+
+    // handle league query
     if (checkObjectId(leagueId)) {
-      queryFilter.league = leagueId;
+      queryFilter.push({
+        $match: {
+          league: leagueId,
+        },
+      });
     }
-    const result = await Team.find(queryFilter);
-    this.sendResponse(res, result);
+
+    // handle get_info query
+    if (getInfo == 'true') {
+      const league = await League.findById(leagueId);
+      const course = league && league.course;
+      console.log(course);
+
+      queryFilter.push({
+        $lookup: {
+          from: 'leagueinfos',
+          localField: '_id',
+          foreignField: 'team',
+          as: 'info',
+        },
+      });
+
+      queryFilter.push({
+        $addFields: {
+          info: {
+            $arrayElemAt: ['$info', 0],
+          },
+        },
+      });
+
+      queryFilter.push({
+        $addFields: {
+          info: {
+            $cond: [{ $eq: ['$info.course', course] }, '$info', '$$REMOVE'],
+          },
+        },
+      });
+    }
+
+    // const result = await Team.find(queryFilter);
+    const reault = await Team.aggregate(queryFilter);
+    this.sendResponse(res, reault);
   };
 
   /**
