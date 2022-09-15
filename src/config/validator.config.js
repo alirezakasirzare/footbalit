@@ -58,6 +58,7 @@ const validatorLabels = {
   text: 'متن',
   source: 'منبع',
   tags: 'لیست تگ ها',
+  news: 'خبر',
 };
 
 module.exports = {

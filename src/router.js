@@ -10,6 +10,7 @@ const courseRoutes = require('./routes/course.routes');
 const gameRoutes = require('./routes/game.routes');
 const eventRoutes = require('./routes/event.routes');
 const newsRoutes = require('./routes/news.routes');
+const commentRoutes = require('./routes/comment.routes');
 const Router = express.Router();
 
 // league routes
@@ -35,6 +36,9 @@ Router.use('/event', eventRoutes);
 
 // news routes
 Router.use('/news', newsRoutes);
+
+// comment routes
+Router.use('/comment', commentRoutes);
 
 // auth routes
 Router.use('/auth', authRoutes);
