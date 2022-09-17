@@ -1,6 +1,7 @@
 const Player = require('../models/player.model');
 const { checkObjectId } = require('../utils/validate.helper');
 const BaseController = require('./_base.controller');
+const upload = require('../services/fileUpload.service');
 
 class PlayerController extends BaseController {
   /**
@@ -10,7 +11,9 @@ class PlayerController extends BaseController {
    * @param {Object} res - express response
    */
   create = async (req, res) => {
+    await upload(req, 'image');
     const body = req.body;
+
     const player = new Player(body);
     const result = await player.save();
 
@@ -75,8 +78,10 @@ class PlayerController extends BaseController {
    * @param {Object} res - express response
    */
   update = async (req, res) => {
+    await upload(req, 'image');
     const id = req.params.id;
     const body = req.body;
+
     const result = await Player.findByIdAndUpdate(
       id,
       {

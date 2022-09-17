@@ -1,5 +1,6 @@
 const League = require('../models/league.model');
 const BaseController = require('./_base.controller');
+const upload = require('../services/fileUpload.service');
 
 class LeagueController extends BaseController {
   /**
@@ -56,7 +57,9 @@ class LeagueController extends BaseController {
    * @param {Object} res - express response
    */
   create = async (req, res) => {
+    await upload(req, 'image');
     const body = req.body;
+
     const league = new League(body);
     const result = await league.save();
     this.sendResponse(res, result, 201);
@@ -69,8 +72,10 @@ class LeagueController extends BaseController {
    * @param {Object} res - express response
    */
   update = async (req, res) => {
+    await upload(req, 'image');
     const id = req.params.id;
     const body = req.body;
+
     const result = await League.findByIdAndUpdate(
       id,
       {

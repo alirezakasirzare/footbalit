@@ -19,6 +19,9 @@ const schema = new mongoose.Schema(
       maxlength: 100,
       required: true,
     },
+    image: {
+      type: String,
+    },
     cups: [{ type: String, ref: 'Cup' }],
     league: { type: String, ref: 'League' },
   },

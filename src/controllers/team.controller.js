@@ -2,6 +2,7 @@ const Team = require('../models/team.model');
 const League = require('../models/league.model');
 const { checkObjectId } = require('../utils/validate.helper');
 const BaseController = require('./_base.controller');
+const upload = require('../services/fileUpload.service');
 
 class TeamController extends BaseController {
   /**
@@ -11,7 +12,9 @@ class TeamController extends BaseController {
    * @param {Object} res - express response
    */
   create = async (req, res) => {
+    await upload(req, 'image');
     const body = req.body;
+
     const team = new Team(body);
     const result = await team.save();
 
@@ -64,6 +67,8 @@ class TeamController extends BaseController {
       {
         $project: {
           persian_name: 1,
+          english_name: 1,
+          image: 1,
           league: 1,
         },
       },
@@ -134,8 +139,10 @@ class TeamController extends BaseController {
    * @param {Object} res - express response
    */
   update = async (req, res) => {
+    await upload(req, 'image');
     const id = req.params.id;
     const body = req.body;
+
     const result = await Team.findByIdAndUpdate(
       id,
       {

@@ -1,6 +1,7 @@
 require('express-async-errors');
 require('dotenv').config();
 const express = require('express');
+const fileUpload = require('express-fileupload');
 
 // start up
 const docs = require('./src/docs');
@@ -14,8 +15,8 @@ require('./startup/processError')();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const staticFiles = process.env.STATIC;
-app.use(express.static(staticFiles));
+app.use(express.static('public'));
+app.use(fileUpload());
 
 // handle routes
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(docs));

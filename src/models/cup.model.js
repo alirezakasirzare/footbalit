@@ -14,6 +14,9 @@ const schema = new mongoose.Schema(
       maxlength: 100,
       required: true,
     },
+    image: {
+      type: String,
+    },
     english_name: {
       type: String,
       maxlength: 100,

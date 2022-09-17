@@ -9,7 +9,9 @@ class CupController extends BaseController {
    * @param {Object} res - express response
    */
   create = async (req, res) => {
+    await upload(req, 'image');
     const body = req.body;
+
     const cup = new Cup(body);
     const result = await cup.save();
 
@@ -46,8 +48,10 @@ class CupController extends BaseController {
    * @param {Object} res - express response
    */
   update = async (req, res) => {
+    await upload(req, 'image');
     const id = req.params.id;
     const body = req.body;
+
     const result = await Cup.findByIdAndUpdate(
       id,
       {
