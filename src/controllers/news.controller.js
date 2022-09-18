@@ -1,4 +1,7 @@
+const { pageRecords } = require('../config/general.config');
 const News = require('../models/news.model');
+const { skipCount } = require('../utils/pagination.helper');
+const { paginationRes } = require('../utils/structureResponse.helper');
 const BaseController = require('./_base.controller');
 
 class NewsController extends BaseController {
@@ -66,12 +69,13 @@ class NewsController extends BaseController {
    * Get all news
    *
    * can filter by tag with set q query
+   * can set page query for get page we want
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
    */
   getAll = async (req, res) => {
-    const q = req.query.q;
+    const { q, page = 1 } = req.query;
 
     // handle q query
     let queryFilter = {};
@@ -79,7 +83,17 @@ class NewsController extends BaseController {
       queryFilter.tags = { $regex: q, $options: 'i' };
     }
 
-    const result = await News.find(queryFilter);
+    // count
+    const count = await News.find(queryFilter).count();
+
+    // execute query
+    const data = await News.find(queryFilter)
+      .sort({ createdAt: -1 })
+      .limit(pageRecords)
+      .skip(skipCount(page));
+
+    // send result
+    const result = paginationRes(data, page, count);
     this.sendResponse(res, result);
   };
 }

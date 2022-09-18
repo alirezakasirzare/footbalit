@@ -1,6 +1,6 @@
 const path = require('path');
 const { v4: uuid } = require('uuid');
-const { mediaPath } = require('../config/global.config');
+const { mediaPath } = require('../config/general.config');
 
 /**
  * upload static files (for now just image)

@@ -1,3 +1,5 @@
+const { calculatePages } = require('./pagination.helper');
+
 /**
  * Create response object with pretty style
  *
@@ -38,7 +40,28 @@ const successResponse = (data) => {
   return baseObject({ data, message: 'The process is successfully completed' });
 };
 
+/**
+ * Create response object template for pagination
+ *
+ * @param {Object} data - data object
+ * @returns {number} - page we want to see
+ * @returns {number} - count the data in database
+ */
+const paginationRes = (data, page, count) => {
+  const pages = calculatePages(count);
+  const intPage = parseInt(page);
+
+  return {
+    data,
+    page: intPage,
+    pages,
+    hasPrevPage: intPage > 1,
+    hasNextPage: pages > intPage,
+  };
+};
+
 module.exports = {
   errorResponse,
   successResponse,
+  paginationRes,
 };
