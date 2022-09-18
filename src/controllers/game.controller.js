@@ -45,7 +45,7 @@ class GameController extends BaseController {
     if (game && game.status == 'ended') {
       const msg =
         'این بازی تمام شده است و دیگر نمیتوانید آن را به روز رسانی کنید';
-      return this.sendResponseMeg(res, msg, 400);
+      return this.sendResponseMsg(res, msg, 400);
     }
 
     // asing body to game document

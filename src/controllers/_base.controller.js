@@ -45,7 +45,7 @@ class BaseController {
    * @param {string} msg - response message
    * @param {number} code - status codes
    */
-  sendResponseMeg = (res, msg, code = 200) => {
+  sendResponseMsg = (res, msg, code = 200) => {
     const data = {
       _message: msg,
     };

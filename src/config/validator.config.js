@@ -59,6 +59,7 @@ const validatorLabels = {
   source: 'منبع',
   tags: 'لیست تگ ها',
   news: 'خبر',
+  code: 'کد',
 };
 
 module.exports = {
