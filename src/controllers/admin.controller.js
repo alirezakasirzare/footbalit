@@ -23,7 +23,8 @@ class AdminController extends BaseController {
     user.permissions = getPermissions(body.role);
 
     const result = await user.save();
-    this.sendResponse(res, result);
+    const { password, ...others } = result._doc;
+    this.sendResponse(res, others);
   };
 
   /**
@@ -42,7 +43,8 @@ class AdminController extends BaseController {
     // change permissions
     user.permissions = body.permissions;
     const result = await user.save();
-    this.sendResponse(res, result);
+    const { password, ...others } = result._doc;
+    this.sendResponse(res, others);
   };
 
   /**

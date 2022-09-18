@@ -1,11 +1,5 @@
-# not send password of user to client
-
 # create limiting for get all
 
-# create image saving and change size of image
+# change size of image when save 
 
 # handle cup[0] validator text
-
-# forget password
-
-# change objetc id to string in all models

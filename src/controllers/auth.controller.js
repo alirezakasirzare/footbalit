@@ -161,7 +161,7 @@ class AuthController extends BaseController {
     );
 
     const { password, ...others } = result._doc;
-    this.sendResponse(res, others, 201);
+    this.sendResponse(res, others, 200);
   };
 }
 
