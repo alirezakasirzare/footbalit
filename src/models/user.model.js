@@ -40,6 +40,9 @@ const schema = new mongoose.Schema(
     permissions: {
       type: [String],
     },
+    image: {
+      type: String,
+    },
   },
   {
     _id: false,
