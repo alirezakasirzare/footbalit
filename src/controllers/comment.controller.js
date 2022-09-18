@@ -1,4 +1,7 @@
+const { pageRecords } = require('../config/general.config');
 const Comment = require('../models/comment.model');
+const { skipCount } = require('../utils/pagination.helper');
+const { paginationRes } = require('../utils/structureResponse.helper');
 const BaseController = require('./_base.controller');
 
 class CommentController extends BaseController {
@@ -49,7 +52,7 @@ class CommentController extends BaseController {
    * @param {Object} res - express response
    */
   getAll = async (req, res) => {
-    const newsId = req.query.news;
+    const { news: newsId, page = 1 } = req.query;
 
     // handle news query
     let queryFilter = {};
@@ -57,8 +60,18 @@ class CommentController extends BaseController {
       queryFilter.news = newsId;
     }
 
+    // count
+    const count = await Comment.find(queryFilter).count();
+
     // execute query
-    const result = await Comment.find(queryFilter).populate('user');
+    const data = await Comment.find(queryFilter)
+      .limit(pageRecords)
+      .skip(skipCount(page))
+      .sort({ createdAt: -1 })
+      .populate('user', 'image firat_name');
+
+    // send result
+    const result = paginationRes(data, page, count);
     this.sendResponse(res, result);
   };
 }
