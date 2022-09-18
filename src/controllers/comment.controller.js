@@ -69,7 +69,7 @@ class CommentController extends BaseController {
       .limit(pageRecords)
       .skip(skipCount(page))
       .sort({ createdAt: -1 })
-      .populate('user', 'image firat_name');
+      .populate('user', 'image first_name');
 
     // send result
     const result = paginationRes(data, page, count);

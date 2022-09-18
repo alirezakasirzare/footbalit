@@ -10,7 +10,7 @@ const schema = new mongoose.Schema(
       unique: true,
       default: mongoose.Types.ObjectId,
     },
-    firat_name: {
+    first_name: {
       type: String,
       maxlength: 100,
       required: true,

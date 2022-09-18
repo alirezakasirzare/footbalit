@@ -32,7 +32,7 @@ const validatorLabels = {
   persian_name: 'نام فارسی',
   english_name: 'نام انگلیسی',
   country: 'نام کشور',
-  firat_name: 'نام کوچک',
+  first_name: 'نام کوچک',
   last_name: 'نام خانوادگی',
   email: 'ایمیل',
   password: 'رمز',
