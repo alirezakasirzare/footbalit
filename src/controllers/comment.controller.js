@@ -47,6 +47,7 @@ class CommentController extends BaseController {
    * Get all comment
    *
    * can filter by news with set news query
+   * can get a soecial page with set page query
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
