@@ -1,3 +1,4 @@
+const sendEmail = require('../services/email.service');
 const {
   errorResponse,
   successResponse,
@@ -57,6 +58,12 @@ class BaseController {
 
     const response = errorResponse(data);
     res.status(code).json(response);
+  };
+
+  sendCodeEmail = (to, code) => {
+    const text = `کد تایید شما: ${code}`;
+    const html = `کد تایید شما: <b>${code}</b>`;
+    sendEmail(to, text, html);
   };
 }
 

@@ -98,6 +98,9 @@ class AuthController extends BaseController {
       }
     );
 
+    // send code
+    this.sendCodeEmail(body.email, randomCode);
+
     const msg = 'کد با موفقیت برای این ایمیل ارسال شد';
     this.sendResponseMsg(res, msg, 200);
   };
