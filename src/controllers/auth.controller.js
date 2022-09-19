@@ -65,7 +65,7 @@ class AuthController extends BaseController {
   };
 
   /**
-   * send code for forget password
+   * send code for email
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
@@ -103,7 +103,7 @@ class AuthController extends BaseController {
   };
 
   /**
-   * check code for forget password
+   * check code sended to email
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
@@ -158,10 +158,39 @@ class AuthController extends BaseController {
       {
         password: body.password,
       }
-    );
+    ).select('-password');
+    this.sendResponse(res, result);
+  };
 
-    const { password, ...others } = result._doc;
-    this.sendResponse(res, others, 200);
+  /**
+   * validate email of the user
+   *
+   * @param {Object} req - express request
+   * @param {Object} res - express response
+   */
+  validateEmail = async (req, res) => {
+    const body = req.body;
+
+    // code not found
+    const code = await Code.findOneAndDelete(body);
+    if (!code) {
+      const data = {
+        code: 'کد نادرست است',
+      };
+      return this.sendResponse(res, data, 400);
+    }
+
+    // execute query
+    const result = await User.findOneAndUpdate(
+      {
+        email: body.email,
+      },
+      {
+        validated: true,
+      }
+    ).select('-password');
+
+    this.sendResponse(res, result);
   };
 }
 

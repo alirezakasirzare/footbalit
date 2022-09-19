@@ -9,16 +9,19 @@ authRoutes.post('/login', authValidator.login, authController.login);
 // POST register user
 authRoutes.post('/register', authValidator.register, authController.register);
 
-// POST send code for forget password feature
+// POST send code for email
+authRoutes.post('/send-code', authValidator.sendCode, authController.sendCode);
+
+// POST validate email
 authRoutes.post(
-  '/forget-password/send-code',
-  authValidator.sendCode,
-  authController.sendCode
+  '/validate-email',
+  authValidator.checkCode,
+  authController.validateEmail
 );
 
-// POST check code for forget password feature
+// POST check code sended for email
 authRoutes.post(
-  '/forget-password/check-code',
+  '/check-code',
   authValidator.checkCode,
   authController.checkCode
 );

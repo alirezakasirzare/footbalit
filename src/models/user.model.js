@@ -32,6 +32,10 @@ const schema = new mongoose.Schema(
       minlength: 4,
       required: true,
     },
+    validated: {
+      type: Boolean,
+      default: false,
+    },
     role: {
       type: String,
       enum: roles,

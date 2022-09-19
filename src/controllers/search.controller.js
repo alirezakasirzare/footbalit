@@ -14,6 +14,7 @@ class SearchController extends BaseController {
   search = async (req, res) => {
     const text = req.params.text;
     const limitCount = 7;
+
     // execute query
     const news = await News.find({
       tags: { $regex: text, $options: 'i' },
