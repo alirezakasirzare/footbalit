@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const winston = require('winston');
 
 // email transport
 const transporter = nodemailer.createTransport({
@@ -26,8 +27,9 @@ const sendEmail = (to, text, html) => {
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
-    console.log(error);
-    return !error;
+    if (error) {
+      winston.error(error.message, error);
+    }
   });
 };
 
