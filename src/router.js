@@ -9,6 +9,7 @@ const cupRoutes = require('./routes/cup.routes');
 const courseRoutes = require('./routes/course.routes');
 const gameRoutes = require('./routes/game.routes');
 const eventRoutes = require('./routes/event.routes');
+const searchRoutes = require('./routes/search.routes');
 const newsRoutes = require('./routes/news.routes');
 const commentRoutes = require('./routes/comment.routes');
 const userRoutes = require('./routes/user.routes');
@@ -19,6 +20,9 @@ Router.use('/league', leagueRoutes);
 
 // user routes
 Router.use('/user', userRoutes);
+
+// search routes
+Router.use('/search', searchRoutes);
 
 // team routes
 Router.use('/team', teamRoutes);
