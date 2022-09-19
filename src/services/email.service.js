@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 
+// email transport
 const transporter = nodemailer.createTransport({
   service: process.env.EMAIL_SERVICE,
   auth: {
@@ -8,6 +9,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+/**
+ * Send message to email
+ *
+ * @param {string} to - user email
+ * @param {string} text - text for sending
+ * @param {string} html - text html tags
+ */
 const sendEmail = (to, text, html) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -18,7 +26,7 @@ const sendEmail = (to, text, html) => {
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
-    console.log(error, info);
+    console.log(error);
     return !error;
   });
 };

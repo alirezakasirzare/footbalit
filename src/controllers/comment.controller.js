@@ -1,7 +1,6 @@
 const { pageRecords } = require('../config/general.config');
 const Comment = require('../models/comment.model');
 const { skipCount } = require('../utils/pagination.helper');
-const { paginationRes } = require('../utils/structureResponse.helper');
 const BaseController = require('./_base.controller');
 
 class CommentController extends BaseController {
@@ -72,8 +71,7 @@ class CommentController extends BaseController {
       .populate('user', 'image first_name');
 
     // send result
-    const result = paginationRes(data, page, count);
-    this.sendResponse(res, result);
+    this.sendResponsePagination(res, data, page, count);
   };
 }
 

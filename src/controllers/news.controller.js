@@ -1,7 +1,6 @@
 const { pageRecords } = require('../config/general.config');
 const News = require('../models/news.model');
 const { skipCount } = require('../utils/pagination.helper');
-const { paginationRes } = require('../utils/structureResponse.helper');
 const BaseController = require('./_base.controller');
 
 class NewsController extends BaseController {
@@ -93,8 +92,7 @@ class NewsController extends BaseController {
       .skip(skipCount(page));
 
     // send result
-    const result = paginationRes(data, page, count);
-    this.sendResponse(res, result);
+    this.sendResponsePagination(res, data, page, count);
   };
 }
 

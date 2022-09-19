@@ -2,6 +2,7 @@ const sendEmail = require('../services/email.service');
 const {
   errorResponse,
   successResponse,
+  paginationRes,
 } = require('../utils/structureResponse.helper');
 
 class BaseController {
@@ -40,6 +41,19 @@ class BaseController {
   };
 
   /**
+   * Send pagination response
+   *
+   * @param {Object} res - express response
+   * @param {Object} data - main data of the proccess
+   * @param {number} page - count of page we want
+   * @param {number} count - count of our recordes
+   */
+  sendResponsePagination = (res, data, page, count) => {
+    const result = paginationRes(data, page, count);
+    return this.sendResponse(res, result);
+  };
+
+  /**
    * Send response just have message in data
    *
    * @param {Object} res - express response
@@ -60,6 +74,12 @@ class BaseController {
     res.status(code).json(response);
   };
 
+  /**
+   * Send code verify to email
+   *
+   * @param {string} to - user email
+   * @param {string} code - code verify
+   */
   sendCodeEmail = (to, code) => {
     const text = `کد تایید شما: ${code}`;
     const html = `کد تایید شما: <b>${code}</b>`;

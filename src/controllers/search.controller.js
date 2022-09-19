@@ -1,4 +1,4 @@
-const { pageRecords } = require('../config/general.config');
+const { searchRecords } = require('../config/general.config');
 const News = require('../models/news.model');
 const Team = require('../models/team.model');
 const League = require('../models/league.model');
@@ -13,26 +13,25 @@ class SearchController extends BaseController {
    */
   search = async (req, res) => {
     const text = req.params.text;
-    const limitCount = 7;
 
     // execute query
     const news = await News.find({
       tags: { $regex: text, $options: 'i' },
     })
       .select('title')
-      .limit(limitCount);
+      .limit(searchRecords);
 
     const teams = await Team.find({
       persian_name: { $regex: text, $options: 'i' },
     })
       .select('persian_name')
-      .limit(limitCount);
+      .limit(searchRecords);
 
     const leagues = await League.find({
       persian_name: { $regex: text, $options: 'i' },
     })
       .select('persian_name')
-      .limit(limitCount);
+      .limit(searchRecords);
 
     // send result
     const data = {
