@@ -2,6 +2,7 @@ require('express-async-errors');
 require('dotenv').config();
 const express = require('express');
 const fileUpload = require('express-fileupload');
+const cors = require('cors');
 
 // start up
 const docs = require('./src/docs');
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(fileUpload());
+app.use(cors());
 
 // handle routes
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(docs));

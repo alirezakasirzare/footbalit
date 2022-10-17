@@ -87,7 +87,6 @@ class TeamController extends BaseController {
     if (getInfo == 'true') {
       const league = await League.findById(leagueId);
       const course = league && league.course;
-      console.log(course);
 
       queryFilter.push({
         $lookup: {
@@ -115,7 +114,6 @@ class TeamController extends BaseController {
       });
     }
 
-    // const result = await Team.find(queryFilter);
     const reault = await Team.aggregate(queryFilter);
     this.sendResponse(res, reault);
   };
