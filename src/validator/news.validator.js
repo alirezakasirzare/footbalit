@@ -10,9 +10,9 @@ class NewsValidator extends BaseValidator {
    */
   create = (req, res, next) => {
     const rules = {
-      title: { type: 'string' },
-      text: { type: 'string' },
-      source: { type: 'string' },
+      title: { type: 'string', empty: false },
+      text: { type: 'string', empty: false },
+      source: { type: 'string', empty: false },
       tags: { type: 'array', items: 'string' },
     };
 
@@ -28,9 +28,9 @@ class NewsValidator extends BaseValidator {
    */
   update = (req, res, next) => {
     const rules = {
-      title: { type: 'string', optional: true },
-      text: { type: 'string', optional: true },
-      source: { type: 'string', optional: true },
+      title: { type: 'string', empty: false, optional: true },
+      text: { type: 'string', empty: false, optional: true },
+      source: { type: 'string', empty: false, optional: true },
       tags: { type: 'array', items: 'string', optional: true },
     };
 

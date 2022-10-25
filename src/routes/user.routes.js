@@ -15,4 +15,7 @@ userRoutes.get(
   userController.getCount
 );
 
+// GET get my data
+userRoutes.get('/me', hasLoggedIn, userController.getMe);
+
 module.exports = userRoutes;

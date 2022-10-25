@@ -18,7 +18,7 @@ class SearchController extends BaseController {
     const news = await News.find({
       tags: { $regex: text, $options: 'i' },
     })
-      .select('title')
+      .select('title source createdAt')
       .limit(searchRecords);
 
     const teams = await Team.find({

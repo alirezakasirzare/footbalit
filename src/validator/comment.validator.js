@@ -10,7 +10,7 @@ class CommentValidator extends BaseValidator {
    */
   create = (req, res, next) => {
     const rules = {
-      text: { type: 'string' },
+      text: { type: 'string', empty: false, empty: false },
       news: { type: 'objectID' },
     };
 
@@ -26,7 +26,7 @@ class CommentValidator extends BaseValidator {
    */
   update = (req, res, next) => {
     const rules = {
-      text: { type: 'string', optional: true },
+      text: { type: 'string', empty: false, optional: true },
       news: { type: 'objectID', optional: true },
     };
 

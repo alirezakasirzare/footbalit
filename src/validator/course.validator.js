@@ -10,7 +10,7 @@ class CourseValidator extends BaseValidator {
    */
   create = (req, res, next) => {
     const rules = {
-      name: { type: 'string', max: 100 },
+      name: { type: 'string', empty: false, max: 100 },
       number: { type: 'number', max: 100 },
     };
 
@@ -26,7 +26,7 @@ class CourseValidator extends BaseValidator {
    */
   update = (req, res, next) => {
     const rules = {
-      name: { type: 'string', max: 100, optional: true },
+      name: { type: 'string', empty: false, max: 100, optional: true },
       number: { type: 'number', max: 100, optional: true },
     };
 

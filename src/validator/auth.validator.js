@@ -11,7 +11,7 @@ class AuthValidator extends BaseValidator {
   login = (req, res, next) => {
     const rules = {
       email: { type: 'email', max: 300 },
-      password: { type: 'string', max: 100, min: 4 },
+      password: { type: 'string', empty: false, max: 100, min: 4 },
     };
 
     this.checkValidation(req, res, next, rules);
@@ -26,10 +26,10 @@ class AuthValidator extends BaseValidator {
    */
   register = (req, res, next) => {
     const rules = {
-      first_name: { type: 'string', max: 100 },
-      last_name: { type: 'string', max: 100, optional: true },
+      first_name: { type: 'string', empty: false, max: 100 },
+      last_name: { type: 'string', empty: false, max: 100, optional: true },
       email: { type: 'email', max: 300 },
-      password: { type: 'string', max: 100, min: 4 },
+      password: { type: 'string', empty: false, max: 100, min: 4 },
       confrim_password: { type: 'equal', field: 'password' },
     };
 
@@ -78,7 +78,7 @@ class AuthValidator extends BaseValidator {
     const rules = {
       email: { type: 'email', max: 300 },
       code: { type: 'number', length: 5 },
-      password: { type: 'string', max: 100, min: 4 },
+      password: { type: 'string', empty: false, max: 100, min: 4 },
       confrim_password: { type: 'equal', field: 'password' },
     };
 

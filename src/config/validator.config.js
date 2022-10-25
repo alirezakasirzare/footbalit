@@ -5,6 +5,7 @@ const validatorMessages = {
   stringMax: '{field} نباید بیشتر از {expected} کاراکتر باشد',
   stringMin: '{field} نباید کمتر از {expected} کاراکتر باشد',
   string: '{field} باید متن باشد',
+  stringEmpty: "'{field}' نباید خالی باشد",
 
   number: '{field} باید عدد باشد',
   numberMax: '{field} نباید بیشتر از {expected} باشد',

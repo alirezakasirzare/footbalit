@@ -21,12 +21,13 @@ class EventController extends BaseController {
    * Get all events
    *
    * can filter by game with set query game
+   * can get team with set get_tram query
    *
    * @param {Object} req - express request
    * @param {Object} res - express response
    */
   getAll = async (req, res) => {
-    const gameId = req.query.game;
+    const { game: gameId, get_team: getTeam } = req.query;
 
     let queryFilter = {};
 
@@ -35,8 +36,15 @@ class EventController extends BaseController {
       queryFilter.game = gameId;
     }
 
+    let query = Event.find(queryFilter);
+
+    // handle get_team query
+    if (getTeam == 'true') {
+      query = query.populate('team');
+    }
+
     // execute query
-    const result = await Event.find(queryFilter);
+    const result = await query;
     this.sendResponse(res, result);
   };
 

@@ -10,8 +10,8 @@ class CupValidator extends BaseValidator {
    */
   create = (req, res, next) => {
     const rules = {
-      persian_name: { type: 'string', max: 100 },
-      english_name: { type: 'string', max: 100 },
+      persian_name: { type: 'string', empty: false, max: 100 },
+      english_name: { type: 'string', empty: false, max: 100 },
     };
 
     this.checkValidation(req, res, next, rules);
@@ -26,8 +26,8 @@ class CupValidator extends BaseValidator {
    */
   update = (req, res, next) => {
     const rules = {
-      persian_name: { type: 'string', max: 100, optional: true },
-      english_name: { type: 'string', max: 100, optional: true },
+      persian_name: { type: 'string', empty: false, max: 100, optional: true },
+      english_name: { type: 'string', empty: false, max: 100, optional: true },
     };
 
     this.checkValidation(req, res, next, rules);

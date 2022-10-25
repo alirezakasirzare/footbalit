@@ -10,9 +10,9 @@ class LeagueValidator extends BaseValidator {
    */
   create = (req, res, next) => {
     const rules = {
-      persian_name: { type: 'string', max: 100 },
-      english_name: { type: 'string', max: 100 },
-      country: { type: 'string', max: 100 },
+      persian_name: { type: 'string', empty: false, max: 100 },
+      english_name: { type: 'string', empty: false, max: 100 },
+      country: { type: 'string', empty: false, max: 100 },
       course: { type: 'objectID' },
     };
 
@@ -28,9 +28,9 @@ class LeagueValidator extends BaseValidator {
    */
   update = (req, res, next) => {
     const rules = {
-      persian_name: { type: 'string', max: 100, optional: true },
-      english_name: { type: 'string', max: 100, optional: true },
-      country: { type: 'string', max: 100, optional: true },
+      persian_name: { type: 'string', empty: false, max: 100, optional: true },
+      english_name: { type: 'string', empty: false, max: 100, optional: true },
+      country: { type: 'string', empty: false, max: 100, optional: true },
       course: { type: 'objectID', optional: true },
     };
 

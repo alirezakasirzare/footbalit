@@ -16,6 +16,18 @@ class UserController extends BaseController {
   };
 
   /**
+   * get the curent user
+   *
+   * @param {Object} req - express request
+   * @param {Object} res - express response
+   */
+  getMe = async (req, res) => {
+    const user = { ...req.user._doc };
+    delete user.password;
+    this.sendResponse(res, user);
+  };
+
+  /**
    * Update user info
    *
    * @param {Object} req - express request

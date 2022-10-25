@@ -10,8 +10,8 @@ class UserValidator extends BaseValidator {
    */
   update = (req, res, next) => {
     const rules = {
-      first_name: { type: 'string', max: 100, optional: true },
-      last_name: { type: 'string', max: 100, optional: true },
+      first_name: { type: 'string', empty: false, max: 100, optional: true },
+      last_name: { type: 'string', empty: false, max: 100, optional: true },
     };
 
     this.checkValidation(req, res, next, rules);
