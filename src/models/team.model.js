@@ -9,12 +9,7 @@ const schema = new mongoose.Schema(
       unique: true,
       default: mongoose.Types.ObjectId,
     },
-    persian_name: {
-      type: String,
-      maxlength: 100,
-      required: true,
-    },
-    english_name: {
+    name: {
       type: String,
       maxlength: 100,
       required: true,

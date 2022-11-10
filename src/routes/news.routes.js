@@ -13,6 +13,9 @@ newsRoutes.post(
   newsController.create
 );
 
+// GET all news (static)
+newsRoutes.get('/all', newsController.getAllStatic);
+
 // PUT update one team
 newsRoutes.put(
   '/:id',
@@ -22,13 +25,13 @@ newsRoutes.put(
   newsController.update
 );
 
-// DELETE delete one team
+// DELETE delete one news
 newsRoutes.delete('/:id', hasLoggedIn, permissions.News, newsController.delete);
 
-// GET get one team
+// GET get one news
 newsRoutes.get('/:id', newsController.getOne);
 
-// GET all enws
+// GET all news
 newsRoutes.get('/', newsController.getAll);
 
 module.exports = newsRoutes;

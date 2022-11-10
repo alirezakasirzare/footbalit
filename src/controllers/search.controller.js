@@ -18,19 +18,19 @@ class SearchController extends BaseController {
     const news = await News.find({
       tags: { $regex: text, $options: 'i' },
     })
-      .select('title source createdAt')
+      .select('title source createdAt image')
       .limit(searchRecords);
 
     const teams = await Team.find({
-      persian_name: { $regex: text, $options: 'i' },
+      name: { $regex: text, $options: 'i' },
     })
-      .select('persian_name')
+      .select('name image')
       .limit(searchRecords);
 
     const leagues = await League.find({
-      persian_name: { $regex: text, $options: 'i' },
+      name: { $regex: text, $options: 'i' },
     })
-      .select('persian_name')
+      .select('name image')
       .limit(searchRecords);
 
     // send result

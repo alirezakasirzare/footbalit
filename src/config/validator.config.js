@@ -30,8 +30,6 @@ const validatorMessages = {
 
 // validator labels
 const validatorLabels = {
-  persian_name: 'نام فارسی',
-  english_name: 'نام انگلیسی',
   country: 'نام کشور',
   first_name: 'نام کوچک',
   last_name: 'نام خانوادگی',
@@ -44,7 +42,7 @@ const validatorLabels = {
   league: 'لیگ',
   team: 'تیم',
   cups: 'لیست جام ها',
-  name: 'اسم',
+  name: 'نام',
   number: 'شماره',
   course: 'دوره',
   team_one: 'تیم اول',

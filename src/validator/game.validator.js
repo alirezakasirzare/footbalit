@@ -13,7 +13,6 @@ class GameValidator extends BaseValidator {
       team_one: { type: 'objectID' },
       team_two: { type: 'objectID' },
       league: { type: 'objectID' },
-      course: { type: 'objectID' },
       date: { type: 'date', convert: true },
     };
 
@@ -32,7 +31,6 @@ class GameValidator extends BaseValidator {
       team_one: { type: 'objectID', optional: true },
       team_two: { type: 'objectID', optional: true },
       league: { type: 'objectID', optional: true },
-      course: { type: 'objectID', optional: true },
       status: {
         type: 'enum',
         values: ['ended', 'started', 'not started', 'suspended'],

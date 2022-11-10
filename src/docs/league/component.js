@@ -19,11 +19,7 @@ const createleagueSchema = (example) => {
         description: "Leagues's persian name",
         example: example.persian_name,
       },
-      english_name: {
-        type: 'string',
-        description: "Leagues's english name",
-        example: example.english_name,
-      },
+
       country: {
         type: 'string',
         description: "Leagues's has for this country",

@@ -1,5 +1,6 @@
 const Event = require('../models/event.model');
 const Game = require('../models/game.model');
+const League = require('../models/league.model');
 const LeagueInfo = require('../models/leagueInfo.model');
 const BaseController = require('./_base.controller');
 
@@ -12,8 +13,13 @@ class GameController extends BaseController {
    */
   create = async (req, res) => {
     const body = req.body;
-    const cup = new Game(body);
-    const result = await cup.save();
+
+    // league
+    const league = await League.findById(body.league);
+
+    // game
+    const game = new Game({ ...body, course: league.course });
+    const result = await game.save();
 
     this.sendResponse(res, result, 201);
   };

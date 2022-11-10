@@ -11,6 +11,8 @@ class NewsController extends BaseController {
    * @param {Object} res - express response
    */
   create = async (req, res) => {
+    await upload(req, 'image');
+
     const body = req.body;
     const news = new News(body);
     const result = await news.save();
@@ -25,6 +27,8 @@ class NewsController extends BaseController {
    * @param {Object} res - express response
    */
   update = async (req, res) => {
+    await upload(req, 'image');
+
     const id = req.params.id;
     const body = req.body;
     const result = await News.findByIdAndUpdate(
@@ -93,6 +97,19 @@ class NewsController extends BaseController {
 
     // send result
     this.sendResponsePagination(res, data, page, count);
+  };
+
+  /**
+   * Get all news
+   *
+   * @param {Object} req - express request
+   * @param {Object} res - express response
+   */
+  getAllStatic = async (req, res) => {
+    const result = await News.find().sort({ createdAt: -1 });
+
+    // send result
+    this.sendResponse(res, result);
   };
 }
 

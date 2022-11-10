@@ -66,10 +66,10 @@ class TeamController extends BaseController {
     let queryFilter = [
       {
         $project: {
-          persian_name: 1,
-          english_name: 1,
+          name: 1,
           image: 1,
           league: 1,
+          cups: 1,
         },
       },
     ];
