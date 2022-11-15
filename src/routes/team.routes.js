@@ -13,6 +13,14 @@ teamRoutes.post(
   teamController.create
 );
 
+// GET count of teams
+teamRoutes.get(
+  '/count',
+  hasLoggedIn,
+  permissions.Admin,
+  teamController.getCount
+);
+
 // PUT update one team
 teamRoutes.put(
   '/:id',

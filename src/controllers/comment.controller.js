@@ -22,6 +22,19 @@ class CommentController extends BaseController {
   };
 
   /**
+   * get Count of comments
+   *
+   * @param {Object} req - express request
+   * @param {Object} res - express response
+   */
+  getCount = async (req, res) => {
+    const count = await Comment.find().count();
+    this.sendResponse(res, {
+      count,
+    });
+  };
+
+  /**
    * Update one comment
    *
    * @param {Object} req - express request

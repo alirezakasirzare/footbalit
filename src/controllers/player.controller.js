@@ -60,6 +60,19 @@ class PlayerController extends BaseController {
   };
 
   /**
+   * get Count of players
+   *
+   * @param {Object} req - express request
+   * @param {Object} res - express response
+   */
+  getCount = async (req, res) => {
+    const count = await Player.find().count();
+    this.sendResponse(res, {
+      count,
+    });
+  };
+
+  /**
    * Delete one player
    *
    * @param {Object} req - express request

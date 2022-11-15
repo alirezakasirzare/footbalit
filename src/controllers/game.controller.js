@@ -127,6 +127,19 @@ class GameController extends BaseController {
   };
 
   /**
+   * get Count of games
+   *
+   * @param {Object} req - express request
+   * @param {Object} res - express response
+   */
+  getCount = async (req, res) => {
+    const count = await Game.find().count();
+    this.sendResponse(res, {
+      count,
+    });
+  };
+
+  /**
    * Get one game
    *
    * can show league by set query get_league=true
@@ -171,8 +184,8 @@ class GameController extends BaseController {
     const oneDay = 24 * 60 * 60 * 1000;
     const timedDate = date ? new Date(date).getTime() : new Date().getTime();
 
-    const startDate = Math.floor(timedDate / oneDay) * oneDay;
-    const endDate = Math.floor((timedDate + oneDay) / oneDay) * oneDay;
+    const startDate = Math.ceil(timedDate / oneDay) * oneDay;
+    const endDate = Math.ceil((timedDate + oneDay) / oneDay) * oneDay;
 
     // execute query
     const result = await Game.find({

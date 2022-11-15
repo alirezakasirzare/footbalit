@@ -100,6 +100,19 @@ class NewsController extends BaseController {
   };
 
   /**
+   * get Count of news
+   *
+   * @param {Object} req - express request
+   * @param {Object} res - express response
+   */
+  getCount = async (req, res) => {
+    const count = await News.find().count();
+    this.sendResponse(res, {
+      count,
+    });
+  };
+
+  /**
    * Get all news
    *
    * @param {Object} req - express request

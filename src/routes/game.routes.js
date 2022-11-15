@@ -7,6 +7,14 @@ const gameRoutes = express.Router();
 // GET get all game
 gameRoutes.get('/', gameController.getAll);
 
+// GET count of games
+gameRoutes.get(
+  '/count',
+  hasLoggedIn,
+  permissions.Admin,
+  gameController.getCount
+);
+
 // GET get one game
 gameRoutes.get('/:id', gameController.getOne);
 

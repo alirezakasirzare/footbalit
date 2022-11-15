@@ -152,6 +152,19 @@ class TeamController extends BaseController {
     );
     this.sendResponse(res, result);
   };
+
+  /**
+   * get Count of team
+   *
+   * @param {Object} req - express request
+   * @param {Object} res - express response
+   */
+  getCount = async (req, res) => {
+    const count = await Team.find().count();
+    this.sendResponse(res, {
+      count,
+    });
+  };
 }
 
 const teamController = new TeamController();

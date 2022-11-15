@@ -7,6 +7,14 @@ const playerRoutes = express.Router();
 // GET get all leagues
 playerRoutes.get('/', playerController.getAll);
 
+// GET count of players
+playerRoutes.get(
+  '/count',
+  hasLoggedIn,
+  permissions.Admin,
+  playerController.getCount
+);
+
 // GET get one league
 playerRoutes.get('/:id', playerController.getOne);
 

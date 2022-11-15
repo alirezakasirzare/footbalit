@@ -51,6 +51,19 @@ class LeagueController extends BaseController {
   };
 
   /**
+   * get Count of leagues
+   *
+   * @param {Object} req - express request
+   * @param {Object} res - express response
+   */
+  getCount = async (req, res) => {
+    const count = await League.find().count();
+    this.sendResponse(res, {
+      count,
+    });
+  };
+
+  /**
    * Create one league
    *
    * @param {Object} req - express request

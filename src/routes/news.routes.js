@@ -13,6 +13,14 @@ newsRoutes.post(
   newsController.create
 );
 
+// GET count of news
+newsRoutes.get(
+  '/count',
+  hasLoggedIn,
+  permissions.Admin,
+  newsController.getCount
+);
+
 // GET all news (static)
 newsRoutes.get('/all', newsController.getAllStatic);
 

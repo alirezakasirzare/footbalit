@@ -7,7 +7,7 @@ const userRoutes = express.Router();
 // PUT update user
 userRoutes.put('/', hasLoggedIn, userValidator.update, userController.update);
 
-// GET get all admins
+// GET count of users
 userRoutes.get(
   '/count',
   hasLoggedIn,
